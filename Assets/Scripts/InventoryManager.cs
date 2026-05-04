@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using System.Collections.Generic;
 
 public class InventoryManager : MonoBehaviour
@@ -7,40 +8,73 @@ public class InventoryManager : MonoBehaviour
 
     public List<Item> inventory = new List<Item>();
 
-    [Header("Debug")]
-    public ItemData testItemData;
-    public ItemData testItemData2;
+    public GameObject inventoryPanel;
+    public InputActionReference toggleAction;
+
+    public bool IsOpen { get; private set; }
 
     private void Awake()
     {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
+        if (Instance != null && Instance != this) { Destroy(Instance.gameObject); }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
+
+    private void OnEnable()  => toggleAction?.action?.Enable();
+    private void OnDisable() => toggleAction?.action?.Disable();
 
     private void Start()
     {
-        AddItem(testItemData, 5);
-        AddItem(testItemData2, 3);
+        inventoryPanel.SetActive(false);
+    }
 
+    private void Update()
+    {
+        if (toggleAction != null && toggleAction.action.WasPressedThisFrame())
+            Toggle();
+    }
+
+    public void Toggle()
+    {
+        if (IsOpen) Close();
+        else Open();
+    }
+
+    public void Open()
+    {
+        IsOpen = true;
+        inventoryPanel.SetActive(true);
         GetComponent<InventoryManagerUI>().RefreshInventoryUI();
+
+        Time.timeScale = 0f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        PlayerLook.IsFrozen = true;
+        PlayerMovement.IsFrozen = true;
+    }
+
+    public void Close()
+    {
+        IsOpen = false;
+        ItemDetailUI.Instance.Hide();
+        inventoryPanel.SetActive(false);
+
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        PlayerLook.IsFrozen = false;
+        PlayerMovement.IsFrozen = false;
     }
 
     public void AddItem(ItemData itemData, int quantity)
     {
         foreach (Item item in inventory)
         {
-            if (item.itemData.itemName == itemData.itemName)
+            if (item.itemData == itemData)
             {
                 item.itemQuantity += quantity;
                 return;
             }
         }
-        
         inventory.Add(new Item { itemData = itemData, itemQuantity = quantity });
     }
 }

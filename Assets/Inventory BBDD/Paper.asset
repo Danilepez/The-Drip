@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbb4c32c673ea46abdd38aa0ab6b18, type: 3}
   m_Name: Paper
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Paper
+  itemName: Papel
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
   itemDescription: Hoja de papel que describe la historia del juego
   itemType: 0

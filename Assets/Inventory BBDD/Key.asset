@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbb4c32c673ea46abdd38aa0ab6b18, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: 
-  itemIcon: {fileID: 0}
-  itemDescription: 
-  itemType: 0
+  itemName: Llave
+  itemIcon: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
+  itemDescription: Llave que abre la puerta bloqueada
+  itemType: 1
