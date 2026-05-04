@@ -40,7 +40,7 @@ public abstract class BaseDoorController : MonoBehaviour
         {
             bool hitThisDoor = hit.collider.GetComponentInParent<BaseDoorController>() == this;
 
-            if (hitThisDoor)
+            if (true)
             {
                 if (!_isLookedAt)
                 {

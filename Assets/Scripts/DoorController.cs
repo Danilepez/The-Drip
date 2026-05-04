@@ -9,6 +9,8 @@ public class DoorController : BaseDoorController
     private Quaternion _closedRotation;
     private Quaternion _openRotation;
 
+    public GameObject objecttoRotate;
+
     protected override void Init()
     {
         _closedRotation = transform.rotation;
