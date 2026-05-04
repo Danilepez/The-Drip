@@ -9,11 +9,10 @@ public class EnemyController : MonoBehaviour
 
     public Transform player;
     public float chaseDistance = 20f;
-    public float runDistance = 10f;
     public float attackDistance = 2f;
-    public float walkSpeed = 1.5f;
     public float runSpeed = 4f;
     public float attackCooldown = 2f;
+    [SerializeField] private float _animSpeedMultiplier = 1.8f;
 
     private NavMeshAgent _agent;
     private Animator _anim;
@@ -41,7 +40,7 @@ public class EnemyController : MonoBehaviour
             var pm = FindAnyObjectByType<PlayerMovement>();
             if (pm != null) player = pm.transform;
         }
-        _agent.speed = walkSpeed;
+        _agent.speed = runSpeed;
 
         foreach (var r in GetComponentsInChildren<Renderer>())
             r.enabled = false;
@@ -57,29 +56,27 @@ public class EnemyController : MonoBehaviour
         if (dist > chaseDistance)
         {
             _agent.ResetPath();
-            _anim?.SetFloat("speed", 0f);
             _anim?.SetBool("isRunning", false);
+            _anim?.SetFloat("speed", 0f);
+            if (_anim != null) _anim.speed = 1f;
         }
         else if (dist <= attackDistance)
         {
             _agent.ResetPath();
-            _anim?.SetFloat("speed", 0f);
             _anim?.SetBool("isRunning", false);
+            _anim?.SetFloat("speed", 0f);
+            if (_anim != null) _anim.speed = 1f;
             TryAttack();
-        }
-        else if (dist <= runDistance)
-        {
-            _agent.speed = runSpeed;
-            _agent.destination = player.position;
-            _anim?.SetFloat("speed", _agent.velocity.magnitude);
-            _anim?.SetBool("isRunning", true);
         }
         else
         {
-            _agent.speed = walkSpeed;
+            _agent.speed = runSpeed;
             _agent.destination = player.position;
-            _anim?.SetFloat("speed", _agent.velocity.magnitude);
-            _anim?.SetBool("isRunning", false);
+            _anim?.SetBool("isRunning", true);
+
+            float velocityRatio = _agent.velocity.magnitude / runSpeed;
+            _anim?.SetFloat("speed", velocityRatio > 0.1f ? runSpeed : 0f);
+            if (_anim != null) _anim.speed = velocityRatio > 0.1f ? velocityRatio * _animSpeedMultiplier : 1f;
         }
     }
 
