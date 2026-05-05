@@ -39,6 +39,11 @@ public class ExamineManager : MonoBehaviour
     private float _examineRoll;
     private float _yawCenter;
     private Transform _examineAnchor;
+    private float _activeMinPitch;
+    private float _activeMaxPitch;
+    private float _activeMinYaw;
+    private float _activeMaxYaw;
+    private bool _clampPitchToBounds;
 
     public static bool IsExamining => Instance != null && Instance._isExamining;
 
@@ -121,6 +126,7 @@ public class ExamineManager : MonoBehaviour
     {
         _isExamining = true;
         _currentTarget = target;
+        ApplyLookLimits(target);
         SetLookedTarget(null);
 
         _originalParent = _camTransform.parent;
@@ -231,10 +237,10 @@ public class ExamineManager : MonoBehaviour
         _examinePitch -= input.y * lookSensitivity * Time.deltaTime;
         _examineYaw += input.x * lookSensitivity * Time.deltaTime;
 
-        float minYawAbs = _yawCenter + minYaw;
-        float maxYawAbs = _yawCenter + maxYaw;
+        float minYawAbs = _yawCenter + _activeMinYaw;
+        float maxYawAbs = _yawCenter + _activeMaxYaw;
         _examineYaw = Mathf.Clamp(_examineYaw, minYawAbs, maxYawAbs);
-        _examinePitch = Mathf.Clamp(_examinePitch, minPitch, maxPitch);
+        _examinePitch = Mathf.Clamp(_examinePitch, _activeMinPitch, _activeMaxPitch);
         ClampPitchToBounds();
         _camTransform.rotation = Quaternion.Euler(_examinePitch, _examineYaw, _examineRoll);
     }
@@ -303,6 +309,8 @@ public class ExamineManager : MonoBehaviour
 
     private void ClampPitchToBounds()
     {
+        if (!_clampPitchToBounds) return;
+
         float minBound;
         float maxBound;
         if (!TryGetPitchLimitsFromBounds(out minBound, out maxBound)) return;
@@ -368,6 +376,31 @@ public class ExamineManager : MonoBehaviour
     {
         if (angle > 180f) angle -= 360f;
         return angle;
+    }
+
+    private void ApplyLookLimits(ExamineTarget target)
+    {
+        _activeMinPitch = minPitch;
+        _activeMaxPitch = maxPitch;
+        _activeMinYaw = minYaw;
+        _activeMaxYaw = maxYaw;
+        _clampPitchToBounds = true;
+
+        if (target == null) return;
+
+        if (target.useCustomYawLimits)
+        {
+            _activeMinYaw = target.minYaw;
+            _activeMaxYaw = target.maxYaw;
+        }
+
+        if (target.useCustomPitchLimits)
+        {
+            _activeMinPitch = target.minPitch;
+            _activeMaxPitch = target.maxPitch;
+        }
+
+        _clampPitchToBounds = target.clampPitchToBounds;
     }
 
     private Vector3 ClampToBounds(Vector3 pos, BoxCollider bounds)

@@ -15,6 +15,9 @@ public class InputHintsUI : MonoBehaviour
     [Header("Pickup")]
     public GameObject pickupHint;
 
+    [Header("Blood")]
+    public GameObject bloodHint;
+
     [Header("Inventory")]
     public GameObject inventoryOpenHint;
     public GameObject inventoryCloseHint;
@@ -22,6 +25,7 @@ public class InputHintsUI : MonoBehaviour
     private object _doorOwner;
     private object _enterExamineOwner;
     private object _pickupOwner;
+    private object _bloodOwner;
 
     private void Awake()
     {
@@ -36,6 +40,7 @@ public class InputHintsUI : MonoBehaviour
         SetActive(doorOpenHint, false);
         SetActive(doorCloseHint, false);
         SetActive(pickupHint, false);
+        SetActive(bloodHint, false);
         SetActive(inventoryOpenHint, false);
         SetActive(inventoryCloseHint, false);
     }
@@ -89,6 +94,21 @@ public class InputHintsUI : MonoBehaviour
             if (_pickupOwner != owner) return;
             _pickupOwner = null;
             SetActive(pickupHint, false);
+        }
+    }
+
+    public void SetBloodHint(object owner, bool show)
+    {
+        if (show)
+        {
+            _bloodOwner = owner;
+            SetActive(bloodHint, true);
+        }
+        else
+        {
+            if (_bloodOwner != owner) return;
+            _bloodOwner = null;
+            SetActive(bloodHint, false);
         }
     }
 

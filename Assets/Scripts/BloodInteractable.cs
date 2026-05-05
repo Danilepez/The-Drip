@@ -10,6 +10,7 @@ public class BloodInteractable : MonoBehaviour
     private static bool _enemySpawned;
     private Camera _cam;
     private bool _isLookedAt;
+    private bool _hasInteracted;
 
     private void Start()
     {
@@ -20,6 +21,8 @@ public class BloodInteractable : MonoBehaviour
 
     private void Update()
     {
+        if (_hasInteracted) return;
+
         Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
         bool hit = Physics.Raycast(ray, out RaycastHit rh, lookRange)
                    && rh.collider.gameObject == gameObject;
@@ -27,13 +30,13 @@ public class BloodInteractable : MonoBehaviour
         if (hit != _isLookedAt)
         {
             _isLookedAt = hit;
-            if (_isLookedAt) HintTextUI.Instance?.Show(this, "F  Interactuar");
-            else HintTextUI.Instance?.Hide(this);
+            InputHintsUI.Instance?.SetBloodHint(this, _isLookedAt);
         }
 
         if (_isLookedAt && interactAction != null && interactAction.action.WasPressedThisFrame())
         {
-            HintTextUI.Instance?.Hide(this);
+            InputHintsUI.Instance?.SetBloodHint(this, false);
+            _hasInteracted = true;
             if (CameraFlash.Instance != null) CameraFlash.Instance.TriggerFlash();
 
             if (!_enemySpawned)
