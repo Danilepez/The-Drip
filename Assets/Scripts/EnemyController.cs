@@ -1,105 +1,92 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(NavMeshAgent))]
-public class EnemyController : MonoBehaviour
+public class EnemyController : BaseEnemy
 {
     public static EnemyController Instance { get; private set; }
 
-    public Transform player;
+    [Header("Chase Settings")]
     public float chaseDistance = 20f;
-    public float attackDistance = 2f;
     public float runSpeed = 4f;
-    public float attackCooldown = 2f;
     [SerializeField] private float _animSpeedMultiplier = 1.8f;
 
-    private NavMeshAgent _agent;
-    private Animator _anim;
-    private float _attackTimer;
-    private bool _isActive;
+    [Header("Chase Audio")]
+    public AudioClip[] chaseClips;
+    public float chaseAudioMinDistance = 2f;
+    public float chaseAudioMaxDistance = 20f;
 
-    private void Awake()
+    private AudioSource _chaseAudio;
+    private int _lastClipIndex = -1;
+
+    protected override void Awake()
     {
         Instance = this;
-        _agent = GetComponent<NavMeshAgent>();
-        _anim = GetComponentInChildren<Animator>() ?? GetComponent<Animator>();
+        base.Awake();
     }
 
-    public void Activate()
+    protected override void Start()
     {
-        foreach (var r in GetComponentsInChildren<Renderer>())
-            r.enabled = true;
-        _isActive = true;
-    }
+        base.Start();
+        Agent.speed = runSpeed;
 
-    private void Start()
-    {
-        if (player == null)
-        {
-            var pm = FindAnyObjectByType<PlayerMovement>();
-            if (pm != null) player = pm.transform;
-        }
-        _agent.speed = runSpeed;
-
-        foreach (var r in GetComponentsInChildren<Renderer>())
-            r.enabled = false;
+        _chaseAudio = gameObject.AddComponent<AudioSource>();
+        _chaseAudio.spatialBlend = 1f;
+        _chaseAudio.rolloffMode = AudioRolloffMode.Linear;
+        _chaseAudio.minDistance = chaseAudioMinDistance;
+        _chaseAudio.maxDistance = chaseAudioMaxDistance;
+        _chaseAudio.loop = false;
+        _chaseAudio.playOnAwake = false;
     }
 
     private void Update()
     {
-        if (!_isActive || player == null) return;
+        if (!IsActive || player == null) return;
 
-        _attackTimer -= Time.deltaTime;
+        AttackTimer -= Time.deltaTime;
         float dist = Vector3.Distance(transform.position, player.position);
 
         if (dist > chaseDistance)
         {
-            _agent.ResetPath();
-            _anim?.SetBool("isRunning", false);
-            _anim?.SetFloat("speed", 0f);
-            if (_anim != null) _anim.speed = 1f;
+            Agent.ResetPath();
+            Anim?.SetBool("isRunning", false);
+            Anim?.SetFloat("speed", 0f);
+            if (Anim != null) Anim.speed = 1f;
         }
         else if (dist <= attackDistance)
         {
-            _agent.ResetPath();
-            _anim?.SetBool("isRunning", false);
-            _anim?.SetFloat("speed", 0f);
-            if (_anim != null) _anim.speed = 1f;
+            Agent.ResetPath();
+            Anim?.SetBool("isRunning", false);
+            Anim?.SetFloat("speed", 0f);
+            if (Anim != null) Anim.speed = 1f;
             TryAttack();
         }
         else
         {
-            _agent.speed = runSpeed;
-            _agent.destination = player.position;
-            _anim?.SetBool("isRunning", true);
+            Agent.speed = runSpeed;
+            Agent.destination = player.position;
+            Anim?.SetBool("isRunning", true);
 
-            float velocityRatio = _agent.velocity.magnitude / runSpeed;
-            _anim?.SetFloat("speed", velocityRatio > 0.1f ? runSpeed : 0f);
-            if (_anim != null) _anim.speed = velocityRatio > 0.1f ? velocityRatio * _animSpeedMultiplier : 1f;
+            float velocityRatio = Agent.velocity.magnitude / runSpeed;
+            Anim?.SetFloat("speed", velocityRatio > 0.1f ? runSpeed : 0f);
+            if (Anim != null) Anim.speed = velocityRatio > 0.1f ? velocityRatio * _animSpeedMultiplier : 1f;
+
+            PlayChaseAudio();
         }
     }
 
-    private void TryAttack()
+    private void PlayChaseAudio()
     {
-        if (_attackTimer > 0f) return;
-        _attackTimer = attackCooldown;
-        _anim?.SetTrigger("attack");
+        if (chaseClips == null || chaseClips.Length == 0) return;
+        if (_chaseAudio.isPlaying) return;
 
-        PlayerLook.IsFrozen = true;
-        PlayerMovement.IsFrozen = true;
+        // Pick a random clip, avoiding immediate repeats
+        int index;
+        do { index = Random.Range(0, chaseClips.Length); }
+        while (chaseClips.Length > 1 && index == _lastClipIndex);
 
-        Vector3 dir = transform.position - player.position;
-        dir.y = 0f;
-        if (dir.sqrMagnitude > 0.001f)
-            player.rotation = Quaternion.LookRotation(dir);
-
-        StartCoroutine(LoseAfterDelay(3f));
-    }
-
-    private IEnumerator LoseAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        GameManager.Instance?.LoseGame();
+        _lastClipIndex = index;
+        _chaseAudio.clip = chaseClips[index];
+        _chaseAudio.Play();
     }
 }

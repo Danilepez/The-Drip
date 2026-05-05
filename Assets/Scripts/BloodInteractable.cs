@@ -49,6 +49,7 @@ public class BloodInteractable : MonoBehaviour
                     Destroy(src.gameObject, screamClip.length + 0.1f);
                 }
                 EnemyController.Instance?.Activate();
+                TeleportingEnemy.Instance?.Activate();
             }
         }
     }
