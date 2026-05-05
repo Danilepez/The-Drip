@@ -12,7 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbb4c32c673ea46abdd38aa0ab6b18, type: 3}
   m_Name: Paper 5
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Papel
+  itemName: Papel 5
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "La llave esta en el s\xF3tano"
+  itemDescription: "Si est\xE1s leyendo esto, seguro ya escuchaste los ruidos y te
+    diste cuenta de que las puertas principales se han bloqueado. La casa no te dejar\xE1
+    ir tan f\xE1cil. Han confinado los peores 'casos de prueba' abajo, donde la luz
+    ya no llega y el fr\xEDo te cala los huesos. La llave maestra que abre las salidas
+    de emergencia se le cay\xF3 al conserje en el s\xF3tano, cerca del \xE1rea de
+    calderas. Baja si es tu \xFAnica opci\xF3n, pero por lo que m\xE1s quieras, no
+    hagas ruido en la oscuridad."
   itemType: 0

@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbb4c32c673ea46abdd38aa0ab6b18, type: 3}
   m_Name: Paper 1
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Papel1
+  itemName: Papel 1
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Busca en alg\xFAn escritorio"
+  itemDescription: "Los informes toxicol\xF3gicos de esta semana no cuadran. El\xEDas
+    estaba completamente estable, pero la dosis de ese nuevo 'tratamiento' que le
+    administraron anoche no aparece en los registros oficiales. Sabiendo c\xF3mo
+    opera el Director, dej\xE9 mis notas originales ocultas en uno de los escritorios
+    de la sala de administraci\xF3n. Si me despiden por hacer preguntas, al menos
+    alguien m\xE1s sabr\xE1 qu\xE9 est\xE1n probando realmente en estos pobres viejos."
   itemType: 0

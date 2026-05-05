@@ -12,7 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49cbb4c32c673ea46abdd38aa0ab6b18, type: 3}
   m_Name: Paper 4
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  itemName: Papel
+  itemName: Papel 4
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "La respuesta est\xE1 detr\xE1s de la estatua"
+  itemDescription: "Este lugar sol\xEDa ser un refugio de paz antes de que la farmac\xE9utica
+    comprara el edificio. La figura de Santa Clara en el patio lo ve\xEDa todo, y
+    ahora su mirada de piedra parece ser lo \xFAnico puro en este infierno de alucinaciones
+    y sombras. Revisa detr\xE1s de la estatua principal; escond\xED las verdaderas
+    radiograf\xEDas de los pacientes all\xED, donde los nuevos directivos nunca se
+    atrever\xEDan a buscar por pura superstici\xF3n."
   itemType: 0

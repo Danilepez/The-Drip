@@ -14,5 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Llave
   itemIcon: {fileID: 21300000, guid: 5d7061fc7da05ce44add317708ec7215, type: 3}
-  itemDescription: Llave que abre la puerta bloqueada
+  itemDescription: "Un pesado trozo de lat\xF3n oscurecido por los a\xF1os y la humedad
+    estancada del s\xF3tano. Su dise\xF1o es antiguo y tosco, con los dientes mellados
+    por el uso desesperado. Lleva un llavero de pl\xE1stico amarillento y agrietado
+    donde apenas se puede leer \"SALIDAS - EMERGENCIA\"."
   itemType: 1

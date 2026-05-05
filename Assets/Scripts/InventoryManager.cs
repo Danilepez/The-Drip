@@ -12,12 +12,11 @@ public class InventoryManager : MonoBehaviour
     public InputActionReference toggleAction;
 
     [Header("Win Condition")]
-    public bool winOnPaperCount = true;
-    public int paperCountToWin = 5;
+    public bool winOnKeyCollect = true;
 
     public bool IsOpen { get; private set; }
     public bool IsBlocked { get; private set; }
-    private bool _paperWinTriggered;
+    private bool _keyWinTriggered;
 
     private void Awake()
     {
@@ -89,37 +88,20 @@ public class InventoryManager : MonoBehaviour
             if (item.itemData == itemData)
             {
                 item.itemQuantity += quantity;
-                CheckPaperWin(itemData);
+                CheckKeyWin(itemData);
                 return;
             }
         }
         inventory.Add(new Item { itemData = itemData, itemQuantity = quantity });
-        CheckPaperWin(itemData);
+        CheckKeyWin(itemData);
     }
 
-    private void CheckPaperWin(ItemData itemData)
+    private void CheckKeyWin(ItemData itemData)
     {
-        if (_paperWinTriggered || !winOnPaperCount || itemData == null) return;
-        if (itemData.itemType != ItemData.ItemType.Paper) return;
+        if (_keyWinTriggered || !winOnKeyCollect || itemData == null) return;
+        if (itemData.itemType != ItemData.ItemType.Key) return;
 
-        int total = GetTotalQuantity(ItemData.ItemType.Paper);
-        if (total >= paperCountToWin)
-        {
-            _paperWinTriggered = true;
-            GameManager.Instance?.WinGame();
-        }
-    }
-
-    private int GetTotalQuantity(ItemData.ItemType type)
-    {
-        int total = 0;
-        foreach (Item item in inventory)
-        {
-            if (item.itemData != null && item.itemData.itemType == type)
-            {
-                total += item.itemQuantity;
-            }
-        }
-        return total;
+        _keyWinTriggered = true;
+        GameManager.Instance?.WinGame();
     }
 }
