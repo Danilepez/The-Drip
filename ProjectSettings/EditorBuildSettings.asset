@@ -9,9 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 35afe97525a8de943bed37a50efe8c8c
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 4043c1984a9d02647a36df8f690146fb
-  - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: b605eba61cfd685498e075c4a4961905
   - enabled: 1
@@ -19,6 +16,6 @@ EditorBuildSettings:
     guid: 74a04c32af8100b4ab505d87bd835984
   - enabled: 1
     path: Assets/Scenes/LoseScreen.unity
-    guid: 5807a7acc4ca35541a65b2452f9dcf19
+    guid: ac34a89d792a0ee4f9300dd94521639d
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
