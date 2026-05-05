@@ -13,6 +13,7 @@ public class DoorController : BaseDoorController
     {
         _closedRotation = transform.rotation;
         _openRotation = Quaternion.Euler(transform.eulerAngles + new Vector3(0, openAngle, 0));
+        InitNavObstacles(isOpen);
     }
 
     protected override IEnumerator Toggle()
@@ -20,6 +21,7 @@ public class DoorController : BaseDoorController
         Quaternion targetRotation = isOpen ? _closedRotation : _openRotation;
         isOpen = !isOpen;
         RefreshHint();
+        ApplyNavObstacleState(isOpen);
 
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
         {

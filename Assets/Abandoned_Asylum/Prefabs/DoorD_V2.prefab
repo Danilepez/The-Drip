@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 33400654289310176}
   - component: {fileID: 23574759475550582}
   - component: {fileID: 64053413180486298}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorD_V2_Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -238,7 +238,8 @@ GameObject:
   - component: {fileID: 33085613640202482}
   - component: {fileID: 23764983916080852}
   - component: {fileID: 64037250782672568}
-  m_Layer: 0
+  - component: {fileID: 3392540088685766517}
+  m_Layer: 3
   m_Name: DoorD_V2_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -339,6 +340,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300006, guid: cc8dc8258c356a14b9bf02775a033c9a, type: 3}
+--- !u!208 &3392540088685766517
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588247688399978}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.47400004, y: 1.049, z: 0.079}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.47500002, y: 1.0710001, z: 0.060000002}
+  m_TimeToStationary: 0.5
 --- !u!1 &1666228259293276
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,7 +368,7 @@ GameObject:
   - component: {fileID: 33576591924204072}
   - component: {fileID: 23088877053522544}
   - component: {fileID: 64854967979305636}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorD_V2_Window2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +481,8 @@ GameObject:
   - component: {fileID: 33550380685485700}
   - component: {fileID: 23191419405090192}
   - component: {fileID: 64086888208593442}
-  m_Layer: 0
+  - component: {fileID: 4633178593094204111}
+  m_Layer: 3
   m_Name: DoorD_V2_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -565,6 +583,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: cc8dc8258c356a14b9bf02775a033c9a, type: 3}
+--- !u!208 &4633178593094204111
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1684502340102720}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.47400004, y: 1.049, z: 0.079}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.47900003, y: 1.0710001, z: 0.060000002}
+  m_TimeToStationary: 0.5
 --- !u!1 &1793096737568600
 GameObject:
   m_ObjectHideFlags: 0
@@ -574,7 +608,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4238493164227154}
-  - component: {fileID: -4123076619157236609}
   m_Layer: 0
   m_Name: DoorD_V2
   m_TagString: Untagged
@@ -602,20 +635,3 @@ Transform:
   - {fileID: 4009549000909392}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4123076619157236609
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1793096737568600}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e3e1e21c19ffdb4da687a01a79243e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoubleDoorController
-  leftPanel: {fileID: 0}
-  rightPanel: {fileID: 0}
-  openAngle: 90
-  openSpeed: 60
-  interactionDistance: 3

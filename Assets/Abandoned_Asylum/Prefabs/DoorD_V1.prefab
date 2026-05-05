@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4447383728893956}
-  - component: {fileID: -4498885503443536262}
   m_Layer: 0
   m_Name: DoorD_V1
   m_TagString: Untagged
@@ -35,23 +34,6 @@ Transform:
   - {fileID: 4798718848437718}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4498885503443536262
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1259367997277306}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e3e1e21c19ffdb4da687a01a79243e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DoubleDoorController
-  leftPanel: {fileID: 0}
-  rightPanel: {fileID: 0}
-  openAngle: 90
-  openSpeed: 60
-  interactionDistance: 3
 --- !u!1 &1572667412200592
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +46,8 @@ GameObject:
   - component: {fileID: 33090375624954126}
   - component: {fileID: 23947026841167588}
   - component: {fileID: 64743008532172070}
-  m_Layer: 0
+  - component: {fileID: 1027059801621615685}
+  m_Layer: 3
   m_Name: DoorD_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -165,6 +148,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300004, guid: 386fb276c56b1794aa3cb06650db7b78, type: 3}
+--- !u!208 &1027059801621615685
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572667412200592}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.47400004, y: 1.049, z: 0.079}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.47300002, y: -0.90900004, z: -0.028}
+  m_TimeToStationary: 0.5
 --- !u!1 &1742071369294280
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +176,8 @@ GameObject:
   - component: {fileID: 33694364789543230}
   - component: {fileID: 23744017339569816}
   - component: {fileID: 64332218561538894}
-  m_Layer: 0
+  - component: {fileID: 7361313717775712874}
+  m_Layer: 3
   m_Name: DoorD_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -278,6 +278,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 386fb276c56b1794aa3cb06650db7b78, type: 3}
+--- !u!208 &7361313717775712874
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1742071369294280}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.47400004, y: 1.049, z: 0.079}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.47300002, y: -0.90900004, z: -0.028}
+  m_TimeToStationary: 0.5
 --- !u!1 &1958764199621066
 GameObject:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class DoubleDoorController : BaseDoorController
 
         _rightClosed = rightPivot.rotation;
         _rightOpen   = Quaternion.Euler(rightPivot.eulerAngles + new Vector3(0, rightOpenAngle, 0));
+        InitNavObstacles(_isOpen);
     }
 
     protected override IEnumerator Toggle()
@@ -28,6 +29,7 @@ public class DoubleDoorController : BaseDoorController
         Quaternion rightTarget = _isOpen ? _rightClosed : _rightOpen;
         _isOpen = !_isOpen;
         RefreshHint();
+        ApplyNavObstacleState(_isOpen);
 
         while (Quaternion.Angle(leftPivot.rotation,  leftTarget)  > 0.01f ||
                Quaternion.Angle(rightPivot.rotation, rightTarget) > 0.01f)

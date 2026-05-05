@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 33954472189120040}
   - component: {fileID: 23994196753615828}
   - component: {fileID: 64354846292301542}
-  m_Layer: 0
+  - component: {fileID: 3876605064587196216}
+  m_Layer: 3
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,6 +114,22 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300002, guid: 30a37ce794ca1c94192e4d8721b12940, type: 3}
+--- !u!208 &3876605064587196216
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085274250471148}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.528, y: 1.049, z: 0.079}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.527, y: -0.90900004, z: 0.028}
+  m_TimeToStationary: 0.5
 --- !u!1 &1119892339220620
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,11 +176,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb66e3a17a6ac041bd1d8c1121e68eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DoorController
-  doorPanel: {fileID: 0}
-  openAngle: 90
+  lookRange: 3
+  interactAction: {fileID: 0}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 0
+  showHint: 1
   openSpeed: 60
-  interactionDistance: 3
-  playerTag: Player
+  navObstacles: []
+  disableObstaclesWhenOpen: 1
+  openAngle: 90
+  isOpen: 0
 --- !u!1 &1733732836752854
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3049099137351880133}
   - component: {fileID: 3218435888475780471}
   - component: {fileID: 6239162686236158810}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorD_V2_Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -450,7 +450,7 @@ GameObject:
   - component: {fileID: 260266082954372479}
   - component: {fileID: 5107288325097331656}
   - component: {fileID: 7504101801195029682}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: DoorD_V2_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
