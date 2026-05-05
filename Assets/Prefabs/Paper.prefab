@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -563534794351016415}
   - component: {fileID: 5317924821669490351}
   - component: {fileID: -7602696278545771276}
+  - component: {fileID: 9180102926492275702}
   m_Layer: 0
   m_Name: Paper
   m_TagString: Untagged
@@ -157,3 +158,19 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.25, y: 0.02, z: 0.29}
   m_Center: {x: 0, y: 0.000508, z: 1.2371661e-18}
+--- !u!114 &9180102926492275702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1801278519735074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 0, g: 1, b: 0, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1

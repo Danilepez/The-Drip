@@ -9,12 +9,19 @@ public class ExamineManager : MonoBehaviour
     public InputActionReference exitAction;
     public InputActionReference moveAction;
     public InputActionReference lookAction;
+    public InputActionReference zoomAction;
 
     public float lookRange = 3f;
     public float moveSpeed = 1.5f;
     public float lookSensitivity = 150f;
     public float minPitch = -30f;
     public float maxPitch = 30f;
+    public float minYaw = -90f;
+    public float maxYaw = 90f;
+    public float zoomSpeed = 0.02f;
+    public bool limitZoomDistance = true;
+    public float minZoomDistance = 0.2f;
+    public float maxZoomDistance = 1.5f;
     public LayerMask examineMask = ~0;
 
     private Camera _cam;
@@ -30,6 +37,8 @@ public class ExamineManager : MonoBehaviour
     private float _examinePitch;
     private float _examineYaw;
     private float _examineRoll;
+    private float _yawCenter;
+    private Transform _examineAnchor;
 
     public static bool IsExamining => Instance != null && Instance._isExamining;
 
@@ -49,6 +58,7 @@ public class ExamineManager : MonoBehaviour
         exitAction?.action?.Enable();
         moveAction?.action?.Enable();
         lookAction?.action?.Enable();
+        zoomAction?.action?.Enable();
     }
 
     private void OnDisable()
@@ -57,6 +67,7 @@ public class ExamineManager : MonoBehaviour
         exitAction?.action?.Disable();
         moveAction?.action?.Disable();
         lookAction?.action?.Disable();
+        zoomAction?.action?.Disable();
     }
 
     private void Start()
@@ -95,6 +106,7 @@ public class ExamineManager : MonoBehaviour
         {
             HandleExamineLook();
             HandleExamineMovement();
+            HandleExamineZoom();
             TryExitExamine();
         }
     }
@@ -116,11 +128,14 @@ public class ExamineManager : MonoBehaviour
         _originalRotation = _camTransform.rotation;
 
         Transform anchor = target.cameraAnchor != null ? target.cameraAnchor : target.transform;
+        _examineAnchor = anchor;
         _camTransform.SetParent(null, true);
         _camTransform.position = anchor.position;
         _examinePitch = NormalizeAngle(anchor.eulerAngles.x);
         _examineYaw = anchor.eulerAngles.y;
         _examineRoll = anchor.eulerAngles.z;
+        _yawCenter = _examineYaw;
+        ClampPitchToBounds();
         _camTransform.rotation = Quaternion.Euler(_examinePitch, _examineYaw, _examineRoll);
 
         SetPlayerVisible(false);
@@ -136,6 +151,7 @@ public class ExamineManager : MonoBehaviour
         _isExamining = false;
         SetBoundsCollisionIgnored(false);
         _currentTarget = null;
+        _examineAnchor = null;
         SetLookedTarget(null);
 
         _camTransform.SetParent(_originalParent, true);
@@ -166,6 +182,8 @@ public class ExamineManager : MonoBehaviour
         }
 
         _camTransform.position = nextPos;
+        ClampPitchToBounds();
+        _camTransform.rotation = Quaternion.Euler(_examinePitch, _examineYaw, _examineRoll);
     }
 
     private ExamineTarget GetLookedExamineTarget()
@@ -211,8 +229,50 @@ public class ExamineManager : MonoBehaviour
         if (input == Vector2.zero) return;
 
         _examinePitch -= input.y * lookSensitivity * Time.deltaTime;
+        _examineYaw += input.x * lookSensitivity * Time.deltaTime;
+
+        float minYawAbs = _yawCenter + minYaw;
+        float maxYawAbs = _yawCenter + maxYaw;
+        _examineYaw = Mathf.Clamp(_examineYaw, minYawAbs, maxYawAbs);
         _examinePitch = Mathf.Clamp(_examinePitch, minPitch, maxPitch);
+        ClampPitchToBounds();
         _camTransform.rotation = Quaternion.Euler(_examinePitch, _examineYaw, _examineRoll);
+    }
+
+    private void HandleExamineZoom()
+    {
+        float scroll = 0f;
+
+        if (zoomAction != null && zoomAction.action != null)
+        {
+            scroll = zoomAction.action.ReadValue<float>();
+        }
+        else if (Mouse.current != null)
+        {
+            scroll = Mouse.current.scroll.ReadValue().y;
+        }
+
+        if (Mathf.Abs(scroll) < 0.01f) return;
+
+        Vector3 nextPos = _camTransform.position + _camTransform.forward * (scroll * zoomSpeed);
+
+        if (limitZoomDistance && _examineAnchor != null)
+        {
+            Vector3 fromAnchor = nextPos - _examineAnchor.position;
+            float dist = fromAnchor.magnitude;
+            if (dist > 0.0001f)
+            {
+                dist = Mathf.Clamp(dist, minZoomDistance, maxZoomDistance);
+                nextPos = _examineAnchor.position + fromAnchor.normalized * dist;
+            }
+        }
+
+        if (_currentTarget != null && _currentTarget.movementBounds != null)
+        {
+            nextPos = ClampToBounds(nextPos, _currentTarget.movementBounds);
+        }
+
+        _camTransform.position = nextPos;
     }
 
     private void SetPlayerVisible(bool visible)
@@ -239,6 +299,69 @@ public class ExamineManager : MonoBehaviour
                 if (b != null) Physics.IgnoreCollision(c, b, ignore);
             }
         }
+    }
+
+    private void ClampPitchToBounds()
+    {
+        float minBound;
+        float maxBound;
+        if (!TryGetPitchLimitsFromBounds(out minBound, out maxBound)) return;
+
+        if (minBound > maxBound)
+        {
+            float swap = minBound;
+            minBound = maxBound;
+            maxBound = swap;
+        }
+
+        _examinePitch = Mathf.Clamp(_examinePitch, minBound, maxBound);
+    }
+
+    private bool TryGetPitchLimitsFromBounds(out float minPitchOut, out float maxPitchOut)
+    {
+        minPitchOut = 0f;
+        maxPitchOut = 0f;
+
+        if (_currentTarget == null || _currentTarget.movementBounds == null) return false;
+        if (_camTransform == null) return false;
+
+        BoxCollider bounds = _currentTarget.movementBounds;
+        Vector3 center = bounds.center;
+        Vector3 extents = bounds.size * 0.5f;
+
+        Quaternion yawRoll = Quaternion.Euler(0f, _examineYaw, _examineRoll);
+        Quaternion invYawRoll = Quaternion.Inverse(yawRoll);
+
+        bool hasValue = false;
+
+        for (int xi = -1; xi <= 1; xi += 2)
+        for (int yi = -1; yi <= 1; yi += 2)
+        for (int zi = -1; zi <= 1; zi += 2)
+        {
+            Vector3 localCorner = center + new Vector3(extents.x * xi, extents.y * yi, extents.z * zi);
+            Vector3 worldCorner = bounds.transform.TransformPoint(localCorner);
+            Vector3 dir = worldCorner - _camTransform.position;
+            if (dir.sqrMagnitude < 0.0001f) continue;
+
+            Vector3 localDir = invYawRoll * dir.normalized;
+            if (localDir.z <= 0.01f) continue;
+
+            float pitch = Mathf.Atan2(-localDir.y, localDir.z) * Mathf.Rad2Deg;
+
+            if (!hasValue)
+            {
+                minPitchOut = pitch;
+                maxPitchOut = pitch;
+                hasValue = true;
+            }
+            else
+            {
+                minPitchOut = Mathf.Min(minPitchOut, pitch);
+                maxPitchOut = Mathf.Max(maxPitchOut, pitch);
+            }
+        }
+
+        return hasValue;
     }
 
     private float NormalizeAngle(float angle)

@@ -7,6 +7,7 @@ public class CollectibleItem : MonoBehaviour
     public int quantity = 1;
     public InputActionReference collectAction;
     public float lookRange = 3f;
+    public LayerMask collectMask = ~0;
 
     private Camera _cam;
     private bool _isLookedAt;
@@ -15,6 +16,7 @@ public class CollectibleItem : MonoBehaviour
     {
         PlayerLook pl = FindAnyObjectByType<PlayerLook>();
         _cam = pl != null ? pl.GetComponentInChildren<Camera>() : Camera.main;
+        ConfigureDefaultMask();
         Debug.Log($"[Collectible] '{gameObject.name}' Start. cam={(_cam == null ? "NULL" : _cam.name)} | collectAction={( collectAction == null ? "NULL" : collectAction.action.name)} | collider={GetComponent<Collider>() != null}");
     }
 
@@ -26,10 +28,11 @@ public class CollectibleItem : MonoBehaviour
 
     private void CheckLook()
     {
+        if (_cam == null) return;
         Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * lookRange, Color.yellow);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, lookRange))
+        if (Physics.Raycast(ray, out RaycastHit hit, lookRange, collectMask, QueryTriggerInteraction.Collide))
         {
             if (hit.collider.gameObject == gameObject)
             {
@@ -57,6 +60,17 @@ public class CollectibleItem : MonoBehaviour
                 _isLookedAt = false;
                 InputHintsUI.Instance?.SetPickupHint(this, false);
             }
+        }
+    }
+
+    private void ConfigureDefaultMask()
+    {
+        if (collectMask.value != ~0) return;
+
+        int examineLayer = LayerMask.NameToLayer("Examine");
+        if (examineLayer >= 0)
+        {
+            collectMask = ~(1 << examineLayer);
         }
     }
 

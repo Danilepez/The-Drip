@@ -123,6 +123,7 @@ GameObject:
   m_Component:
   - component: {fileID: 826290157798765687}
   - component: {fileID: 7230526566476234699}
+  - component: {fileID: 695120738562923209}
   m_Layer: 0
   m_Name: Pivot (2)
   m_TagString: Untagged
@@ -160,9 +161,61 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &695120738562923209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550974304778565388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
+--- !u!1 &1043427677774896169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7452219554990443707}
+  m_Layer: 0
+  m_Name: CameraAnchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7452219554990443707
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043427677774896169}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.712, z: -1.484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2546598807402245857}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1060547096190155865
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,6 +565,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3548482666431879052}
   - component: {fileID: 6198704533529346871}
+  - component: {fileID: 3483899972977792209}
   m_Layer: 0
   m_Name: Pivot (5)
   m_TagString: Untagged
@@ -549,9 +603,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &3483899972977792209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2255807975531586538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &2894741275725319685
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +637,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6398224403054896414}
   - component: {fileID: 5244732112819176427}
+  - component: {fileID: 8506997791446985843}
   m_Layer: 0
   m_Name: Pivot (11)
   m_TagString: Untagged
@@ -599,9 +675,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &8506997791446985843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2894741275725319685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &3220085611796830099
 GameObject:
   m_ObjectHideFlags: 0
@@ -612,6 +709,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5054354570749839939}
   - component: {fileID: 6494208397653989241}
+  - component: {fileID: 2446043141586980120}
   m_Layer: 0
   m_Name: Pivot (7)
   m_TagString: Untagged
@@ -649,9 +747,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &2446043141586980120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3220085611796830099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &3349971454223998955
 GameObject:
   m_ObjectHideFlags: 0
@@ -991,6 +1110,59 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 525e42c8aa5e52e4ea137bc78720fcfc, type: 3}
+--- !u!1 &4367256883530258997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5830691348139158005}
+  - component: {fileID: 1531939605771458672}
+  m_Layer: 0
+  m_Name: MovementBounds
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5830691348139158005
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367256883530258997}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.333, z: -1.432}
+  m_LocalScale: {x: 2.0907, y: 2.617755, z: 0.55786}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2546598807402245857}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1531939605771458672
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4367256883530258997}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4543411907931458244
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,6 +1173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1633069449626859249}
   - component: {fileID: 4817919419112791130}
+  - component: {fileID: 4109551849212620465}
   m_Layer: 0
   m_Name: Pivot (8)
   m_TagString: Untagged
@@ -1038,9 +1211,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &4109551849212620465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4543411907931458244}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &5220428714652981840
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,6 +1358,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8448271232525181741}
   - component: {fileID: 5747685694468235819}
+  - component: {fileID: 180018787777036641}
   m_Layer: 0
   m_Name: Pivot (3)
   m_TagString: Untagged
@@ -1201,9 +1396,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &180018787777036641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5443181001713220278}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &5502620593130316777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,6 +1688,9 @@ Transform:
   - {fileID: 4878194826354418577}
   - {fileID: 6398224403054896414}
   - {fileID: 341250756707277631}
+  - {fileID: 4636504310648089037}
+  - {fileID: 7452219554990443707}
+  - {fileID: 5830691348139158005}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -90.00001, z: 0}
 --- !u!1 &5907658570844196106
@@ -1597,6 +1816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4878194826354418577}
   - component: {fileID: 1647665505657715972}
+  - component: {fileID: 6337900609812572002}
   m_Layer: 0
   m_Name: Pivot (10)
   m_TagString: Untagged
@@ -1634,9 +1854,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &6337900609812572002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6116183071928517273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &6382237862416393589
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,6 +1888,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4774778351600673593}
   - component: {fileID: 2460895981426547175}
+  - component: {fileID: 8796429909394466718}
   m_Layer: 0
   m_Name: Pivot (6)
   m_TagString: Untagged
@@ -1684,9 +1926,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &8796429909394466718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6382237862416393589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &6691083949807968311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1810,6 +2073,7 @@ GameObject:
   m_Component:
   - component: {fileID: 341250756707277631}
   - component: {fileID: 1240617344671005741}
+  - component: {fileID: 3937890526515817864}
   m_Layer: 0
   m_Name: Pivot (12)
   m_TagString: Untagged
@@ -1847,9 +2111,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &3937890526515817864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7707342525220913349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &7739061379810773340
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,6 +2145,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571915428824760908}
   - component: {fileID: 288835512622237598}
+  - component: {fileID: 8021344911251314490}
   m_Layer: 0
   m_Name: Pivot (1)
   m_TagString: Untagged
@@ -1897,9 +2183,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &8021344911251314490
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7739061379810773340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &8011028908254191774
 GameObject:
   m_ObjectHideFlags: 0
@@ -1910,6 +2217,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2844863457269930045}
   - component: {fileID: 6167224398982422358}
+  - component: {fileID: 8270337274880156453}
   m_Layer: 0
   m_Name: Pivot (9)
   m_TagString: Untagged
@@ -1947,9 +2255,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &8270337274880156453
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8011028908254191774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
 --- !u!1 &8575536699966965538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2073,6 +2402,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6171267480675983666}
   - component: {fileID: 8760451548381620423}
+  - component: {fileID: 9037712120072011680}
   m_Layer: 0
   m_Name: Pivot (4)
   m_TagString: Untagged
@@ -2110,6 +2440,96 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DrawerController
   lookRange: 3
   interactAction: {fileID: 1781555164194001046, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  interactMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  requireExamineMode: 1
+  showHint: 1
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+--- !u!114 &9037712120072011680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8986173881679277671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3dea8b1fb466c4886755de180066df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Highlightable
+  highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+  useBaseColor: 1
+  useEmission: 1
+  emissionIntensity: 1
+--- !u!1 &9211573776240129720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4636504310648089037}
+  - component: {fileID: 2348993023875471598}
+  - component: {fileID: 4568351414941221377}
+  m_Layer: 6
+  m_Name: SheetRack_Examine
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4636504310648089037
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211573776240129720}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.043, y: 0.677, z: -0.045}
+  m_LocalScale: {x: 1.5441, y: 1.172, z: 0.64608}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2546598807402245857}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2348993023875471598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211573776240129720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5690bb17138dba4c82ebcdf98789100, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExamineTarget
+  cameraAnchor: {fileID: 7452219554990443707}
+  movementBounds: {fileID: 1531939605771458672}
+  highlight: {fileID: 0}
+--- !u!65 &4568351414941221377
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9211573776240129720}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
