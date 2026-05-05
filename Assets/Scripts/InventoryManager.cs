@@ -12,6 +12,7 @@ public class InventoryManager : MonoBehaviour
     public InputActionReference toggleAction;
 
     public bool IsOpen { get; private set; }
+    public bool IsBlocked { get; private set; }
 
     private void Awake()
     {
@@ -25,12 +26,21 @@ public class InventoryManager : MonoBehaviour
     private void Start()
     {
         inventoryPanel.SetActive(false);
+        InputHintsUI.Instance?.SetInventoryHint(IsOpen, IsBlocked);
     }
 
     private void Update()
     {
+        if (IsBlocked) return;
         if (toggleAction != null && toggleAction.action.WasPressedThisFrame())
             Toggle();
+    }
+
+    public void SetBlocked(bool blocked)
+    {
+        IsBlocked = blocked;
+        if (IsBlocked && IsOpen) Close();
+        InputHintsUI.Instance?.SetInventoryHint(IsOpen, IsBlocked);
     }
 
     public void Toggle()
@@ -50,6 +60,7 @@ public class InventoryManager : MonoBehaviour
         Cursor.visible = true;
         PlayerLook.IsFrozen = true;
         PlayerMovement.IsFrozen = true;
+        InputHintsUI.Instance?.SetInventoryHint(IsOpen, IsBlocked);
     }
 
     public void Close()
@@ -63,6 +74,7 @@ public class InventoryManager : MonoBehaviour
         Cursor.visible = false;
         PlayerLook.IsFrozen = false;
         PlayerMovement.IsFrozen = false;
+        InputHintsUI.Instance?.SetInventoryHint(IsOpen, IsBlocked);
     }
 
     public void AddItem(ItemData itemData, int quantity)

@@ -37,7 +37,7 @@ public class CollectibleItem : MonoBehaviour
                 {
                     _isLookedAt = true;
                     Debug.Log($"[Collectible] Mirando '{gameObject.name}'");
-                    HintTextUI.Instance?.Show(this, $"F  Recoger {itemData.itemName}");
+                    InputHintsUI.Instance?.SetPickupHint(this, true);
                 }
             }
             else
@@ -46,7 +46,7 @@ public class CollectibleItem : MonoBehaviour
                 {
                     Debug.Log($"[Collectible] Rayo golpeo '{hit.collider.gameObject.name}', no el item.");
                     _isLookedAt = false;
-                    HintTextUI.Instance?.Hide(this);
+                    InputHintsUI.Instance?.SetPickupHint(this, false);
                 }
             }
         }
@@ -55,7 +55,7 @@ public class CollectibleItem : MonoBehaviour
             if (_isLookedAt)
             {
                 _isLookedAt = false;
-                HintTextUI.Instance?.Hide(this);
+                InputHintsUI.Instance?.SetPickupHint(this, false);
             }
         }
     }
@@ -73,9 +73,17 @@ public class CollectibleItem : MonoBehaviour
         if (collectAction.action.WasPressedThisFrame())
         {
             Debug.Log("[Collectible] F presionado → recogiendo.");
-            HintTextUI.Instance?.Hide(this);
+            InputHintsUI.Instance?.SetPickupHint(this, false);
             InventoryManager.Instance?.AddItem(itemData, quantity);
             Destroy(gameObject);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_isLookedAt)
+        {
+            InputHintsUI.Instance?.SetPickupHint(this, false);
         }
     }
 }

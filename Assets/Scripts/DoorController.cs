@@ -9,8 +9,6 @@ public class DoorController : BaseDoorController
     private Quaternion _closedRotation;
     private Quaternion _openRotation;
 
-    public GameObject objecttoRotate;
-
     protected override void Init()
     {
         _closedRotation = transform.rotation;
@@ -21,6 +19,7 @@ public class DoorController : BaseDoorController
     {
         Quaternion targetRotation = isOpen ? _closedRotation : _openRotation;
         isOpen = !isOpen;
+        RefreshHint();
 
         while (Quaternion.Angle(transform.rotation, targetRotation) > 0.01f)
         {
@@ -28,5 +27,11 @@ public class DoorController : BaseDoorController
             yield return null;
         }
         transform.rotation = targetRotation;
+    }
+
+    protected override bool TryGetOpenState(out bool open)
+    {
+        open = isOpen;
+        return true;
     }
 }

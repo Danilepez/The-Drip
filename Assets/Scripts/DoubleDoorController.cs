@@ -27,6 +27,7 @@ public class DoubleDoorController : BaseDoorController
         Quaternion leftTarget  = _isOpen ? _leftClosed  : _leftOpen;
         Quaternion rightTarget = _isOpen ? _rightClosed : _rightOpen;
         _isOpen = !_isOpen;
+        RefreshHint();
 
         while (Quaternion.Angle(leftPivot.rotation,  leftTarget)  > 0.01f ||
                Quaternion.Angle(rightPivot.rotation, rightTarget) > 0.01f)
@@ -38,5 +39,11 @@ public class DoubleDoorController : BaseDoorController
 
         leftPivot.rotation  = leftTarget;
         rightPivot.rotation = rightTarget;
+    }
+
+    protected override bool TryGetOpenState(out bool open)
+    {
+        open = _isOpen;
+        return true;
     }
 }
