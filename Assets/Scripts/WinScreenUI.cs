@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
-
 public class WinScreenUI : MonoBehaviour
 {
     private void Start()
@@ -11,11 +9,11 @@ public class WinScreenUI : MonoBehaviour
 
     public void OnRestartClicked()
     {
-        SceneManager.LoadScene("Level1");
+        GameManager.Instance?.RestartGame();
     }
 
     public void OnQuitClicked()
     {
-        Application.Quit();
+        GameManager.Instance?.GoToMainMenu();
     }
 }

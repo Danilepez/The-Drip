@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 4
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Este lugar sol\xEDa ser un refugio de paz antes de que la farmac\xE9utica
-    comprara el edificio. La figura de Santa Clara en el patio lo ve\xEDa todo, y
-    ahora su mirada de piedra parece ser lo \xFAnico puro en este infierno de alucinaciones
-    y sombras. Revisa detr\xE1s de la estatua principal; escond\xED las verdaderas
-    radiograf\xEDas de los pacientes all\xED, donde los nuevos directivos nunca se
-    atrever\xEDan a buscar por pura superstici\xF3n."
+  itemDescription: "El c\xF3digo ya no sirve, cortaron el sistema central. Nuestra
+    \xFAnica esperanza es encontrar la llave maestra f\xEDsica, pero necesito reunir
+    provisiones antes de intentar bajar a los niveles inferiores del edificio. Sub\xED
+    de nuevo al segundo piso escapando de las sombras y escond\xED unos vendajes
+    y una linterna encima del refrigerador de la cocina. Ve all\xED, pero mu\xE9vete
+    en silencio absoluto; hay un ruido espeso detr\xE1s de las paredes y si haces
+    un movimiento en falso, sabr\xE1 que est\xE1s aqu\xED."
   itemType: 0

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 5
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Si est\xE1s leyendo esto, seguro ya escuchaste los ruidos y te
-    diste cuenta de que las puertas principales se han bloqueado. La casa no te dejar\xE1
-    ir tan f\xE1cil. Han confinado los peores 'casos de prueba' abajo, donde la luz
-    ya no llega y el fr\xEDo te cala los huesos. La llave maestra que abre las salidas
-    de emergencia se le cay\xF3 al conserje en el s\xF3tano, cerca del \xE1rea de
-    calderas. Baja si es tu \xFAnica opci\xF3n, pero por lo que m\xE1s quieras, no
-    hagas ruido en la oscuridad."
+  itemDescription: "Ya no hay tiempo, la presencia de este lugar nos est\xE1 acorralando.
+    La \xFAnica salida es buscar la vieja llave maestra que cay\xF3 en el s\xF3tano.
+    Sin embargo, algo espantoso pas\xF3 cerca de las escaleras; hubo un accidente,
+    o tal vez un ataque, y derramaron algo horrible. Hay unas manchas de sangre espesa
+    esparci\xE9ndose por el suelo que parecen contaminar el ambiente. Si dejas que
+    esa suciedad se asiente y el tiempo pase, la casa terminar\xE1 de corromperse
+    y 'eso' te estar\xE1 esperando en la oscuridad."
   itemType: 0

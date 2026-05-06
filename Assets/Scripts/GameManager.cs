@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
 
     public void StartGame()
     {
+        BloodInteractable.ResetState();
         SceneManager.LoadScene(gameScene);
     }
 
@@ -51,6 +52,7 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        BloodInteractable.ResetState();
         SceneManager.LoadScene(gameScene);
     }
 

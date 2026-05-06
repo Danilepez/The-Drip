@@ -8,9 +8,18 @@ public class BloodInteractable : MonoBehaviour
     public float lookRange = 2f;
 
     private static bool _enemySpawned;
+    public static int BloodPhotoCount { get; private set; }
+    public static int RequiredBloodPhotos = 2;
+    public static bool HasAllBloodPhotos => BloodPhotoCount >= RequiredBloodPhotos;
     private Camera _cam;
     private bool _isLookedAt;
     private bool _hasInteracted;
+
+    public static void ResetState()
+    {
+        _enemySpawned = false;
+        BloodPhotoCount = 0;
+    }
 
     private void Start()
     {
@@ -37,6 +46,7 @@ public class BloodInteractable : MonoBehaviour
         {
             InputHintsUI.Instance?.SetBloodHint(this, false);
             _hasInteracted = true;
+            BloodPhotoCount += 1;
             if (CameraFlash.Instance != null) CameraFlash.Instance.TriggerFlash();
 
             if (!_enemySpawned)

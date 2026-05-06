@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 2
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Ese goteo constante en el pasillo me est\xE1 volviendo loco,
-    siento que la casa me respira en la nuca. Ayer en la madrugada vi a una de las
-    enfermeras guardando frascos de cristal sin etiqueta; los escondi\xF3 detr\xE1s
-    de las gasas, bien al fondo de un estante en la sala de suministros. Sea lo que
-    sea esa sustancia oscura y espesa que le dan a los pacientes, juro que huele
-    a \xF3xido y a muerte."
+  itemDescription: "Alguien casi me descubre en la sala de cirug\xEDa, la opresi\xF3n
+    en el aire se siente cada vez m\xE1s pesada y el goteo constante me est\xE1 enloqueciendo.
+    Las notas originales del m\xE9dico forense, las que confirman el horror que vivi\xF3
+    El\xEDas, no pod\xEDan quedarse aqu\xED. Me escabull\xED hasta la oficina principal,
+    tambi\xE9n aqu\xED en este segundo piso, y dej\xE9 el reporte tirado a simple
+    vista, justo encima del escritorio. T\xF3malo r\xE1pido, y si escuchas una camilla
+    rodando por el pasillo, esc\xF3ndete de inmediato."
   itemType: 0

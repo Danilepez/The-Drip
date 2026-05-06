@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 3
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "S\xE9 que me est\xE1n vigilando. Alguien entr\xF3 anoche a mi
-    consultorio y se llev\xF3 todos mis archivos m\xE9dicos. Creyeron que hab\xEDan
-    limpiado toda la evidencia sobre la agon\xEDa de El\xEDas, pero fui m\xE1s r\xE1pido.
-    Pegu\xE9 la \xFAltima cinta de audio con su confesi\xF3n en el fondo de ese estante
-    vac\xEDo del pasillo oeste, el que nadie usa. Si no logro salir de aqu\xED esta
-    noche, por favor, aseg\xFArate de que esto salga a la luz."
+  itemDescription: "Con estos documentos podr\xEDamos hundir a la farmac\xE9utica,
+    pero me aterra la idea de que nos hayan dejado encerrados a prop\xF3sito. El
+    director cambi\xF3 las contrase\xF1as de las puertas principales, as\xED que
+    tuve que bajar sigilosamente para buscar el c\xF3digo de emergencia. Lo anot\xE9
+    en un pedazo de papel y lo ocult\xE9 en el estante de s\xE1banas de la sala de
+    guardia, abajo en el primer piso. No te demores, el hedor a \xF3xido y humedad
+    en este edificio se est\xE1 volviendo insoportable."
   itemType: 0
