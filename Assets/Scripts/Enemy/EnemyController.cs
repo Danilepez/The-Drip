@@ -31,6 +31,27 @@ public class EnemyController : MonoBehaviour
         foreach (var r in GetComponentsInChildren<Renderer>())
             r.enabled = true;
         _isActive = true;
+        if (_agent != null) _agent.isStopped = false;
+    }
+
+    public void Deactivate()
+    {
+        _isActive = false;
+        if (_agent != null)
+        {
+            _agent.ResetPath();
+            _agent.isStopped = true;
+        }
+
+        if (_anim != null)
+        {
+            _anim.SetBool("isRunning", false);
+            _anim.SetFloat("speed", 0f);
+            _anim.speed = 1f;
+        }
+
+        foreach (var r in GetComponentsInChildren<Renderer>())
+            r.enabled = false;
     }
 
     private void Start()
