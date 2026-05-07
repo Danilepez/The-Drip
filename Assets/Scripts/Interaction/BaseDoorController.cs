@@ -39,4 +39,13 @@ public abstract class BaseDoorController : BaseInteractable
     }
 
     protected abstract IEnumerator Toggle();
+    public IEnumerator ForceCloseRoutine()
+    {
+        // Kill any in-progress open/close animation running on this component
+        // (e.g. the player just opened the door and the swing isn't done yet).
+        StopAllCoroutines();
+
+        if (TryGetOpenState(out bool isOpen) && isOpen)
+            yield return Toggle();
+    }
 }
