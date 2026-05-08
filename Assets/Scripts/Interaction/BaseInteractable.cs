@@ -15,10 +15,8 @@ public abstract class BaseInteractable : MonoBehaviour
     private bool _isLookedAt = false;
     private Highlightable _highlightable;
 
-    /// <summary>Bloquea la interacción sin deshabilitar el componente ni el InputAction.</summary>
     public bool isLocked = false;
 
-    [Tooltip("Si está marcado, la puerta/interactable empieza bloqueado al iniciar la escena.")]
     public bool startLocked = false;
 
     protected virtual void Awake()
@@ -65,7 +63,6 @@ public abstract class BaseInteractable : MonoBehaviour
 
         Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
 
-        // Ignorar triggers — los colliders físicos de puertas/cajones no deben ser triggers
         if (Physics.Raycast(ray, out RaycastHit hit, lookRange, interactMask, QueryTriggerInteraction.Ignore))
         {
             bool hitThis = hit.collider.GetComponentInParent<BaseInteractable>() == this;
@@ -97,7 +94,6 @@ public abstract class BaseInteractable : MonoBehaviour
         if (!isLookedAt) HintTextUI.Instance?.Hide(this);
     }
 
-    /// <summary>Sobrescribir en subclases para mostrar un hint diferente (ej. Grabadora).</summary>
     protected virtual void ShowInteractHint(bool isLookedAt, bool isOpen)
     {
         InputHintsUI.Instance?.SetDoorHint(this, isLookedAt, isOpen);

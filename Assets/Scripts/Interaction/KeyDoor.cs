@@ -1,14 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-/// <summary>
-/// Puerta principal de salida. Requiere tener la llave en el inventario.
-/// Al interactuar con llave, gana directamente sin animación.
-/// </summary>
 public class KeyDoor : BaseInteractable
 {
     [Header("Llave requerida")]
-    [Tooltip("Arrastra aquí el ItemData (ScriptableObject) de la llave.")]
     public ItemData keyItemData;
 
     protected override void Init() { }

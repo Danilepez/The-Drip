@@ -71,22 +71,16 @@ public class PlayerLook : MonoBehaviour
         transform.Rotate(Vector3.up * mouseInput.x * mouseSensitivity * Time.deltaTime);
     }
 
-    /// <summary>
-    /// Fuerza la cámara a mirar hacia un punto del mundo (ej. cara del enemigo).
-    /// Llama esto antes de congelar al jugador.
-    /// </summary>
     public static void ForceLookAt(Vector3 worldTarget)
     {
         PlayerLook pl = FindAnyObjectByType<PlayerLook>();
         if (pl == null || pl.playerCamera == null) return;
 
-        // Rotar el body horizontalmente
         Vector3 toTarget = worldTarget - pl.transform.position;
         toTarget.y = 0f;
         if (toTarget.sqrMagnitude > 0.001f)
             pl.transform.rotation = Quaternion.LookRotation(toTarget);
 
-        // Rotar la cámara verticalmente (pitch)
         Vector3 toCam = worldTarget - pl.playerCamera.position;
         float pitch = -Mathf.Atan2(toCam.y, new Vector2(toCam.x, toCam.z).magnitude) * Mathf.Rad2Deg;
         pl.xRotation = Mathf.Clamp(pitch, -90f, 90f);

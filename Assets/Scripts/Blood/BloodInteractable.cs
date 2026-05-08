@@ -36,6 +36,11 @@ public class BloodInteractable : MonoBehaviour
         BloodPhotoCount = 0;
     }
 
+    private void Awake()
+    {
+        CacheVisuals();
+    }
+
     private void Start()
     {
         PlayerLook pl = FindAnyObjectByType<PlayerLook>();
@@ -43,8 +48,7 @@ public class BloodInteractable : MonoBehaviour
         if (_cam == null) _cam = Camera.main;
 
         ConfigureDrip();
-        CacheVisuals();
-        if (startActive) Activate();
+        if (startActive && GameFlowController.Instance == null) Activate();
     }
 
     private void Update()

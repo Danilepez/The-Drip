@@ -26,7 +26,6 @@ public class DrawerController : BaseInteractable
         isOpen = !isOpen;
         RefreshHint();
 
-        // Reproducir sonido
         AudioClip clip = isOpen ? openClip : closeClip;
         if (clip != null)
         {

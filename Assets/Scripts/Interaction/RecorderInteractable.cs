@@ -9,7 +9,6 @@ public class RecorderInteractable : BaseInteractable
     public bool playOnce = true;
 
     [Header("Hint UI")]
-    [Tooltip("Asigna aquí el GameObject del hint 'E — Reproducir' de tu Canvas.")]
     public GameObject recorderHintUI;
 
     private bool _played;
@@ -28,14 +27,12 @@ public class RecorderInteractable : BaseInteractable
         if (_showingHint == isLookedAt) return;
         _showingHint = isLookedAt;
 
-        // Si hay hint asignado directamente, usarlo
         if (recorderHintUI != null)
         {
             recorderHintUI.SetActive(isLookedAt);
             return;
         }
 
-        // Fallback: usar InputHintsUI
         InputHintsUI.Instance?.SetRecorderHint(this, isLookedAt);
     }
 
@@ -44,6 +41,7 @@ public class RecorderInteractable : BaseInteractable
         if (playOnce && _played) yield break;
 
         _played = true;
+        isLocked = true;
 
         if (audioSource != null && clip != null)
         {

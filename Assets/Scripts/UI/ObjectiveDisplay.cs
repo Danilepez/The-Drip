@@ -1,17 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-/// <summary>
-/// Muestra el objetivo actual en pantalla. Se oculta en ExamineMode y en Inventario.
-///
-/// Setup:
-///  - objectiveText   → TMP_Text del objetivo
-///  - root            → Panel contenedor (opcional, para animar)
-///  - objectives[]    → Lista de textos en orden (configura en Inspector)
-///
-/// Para avanzar: llama NextObjective() desde onCollected de cada nota/evento.
-/// Para saltar: llama SetObjective(index).
-/// </summary>
+
 public class ObjectiveDisplay : MonoBehaviour
 {
     public static ObjectiveDisplay Instance { get; private set; }
@@ -25,7 +15,7 @@ public class ObjectiveDisplay : MonoBehaviour
     public string[] objectives = new string[]
     {
         "Reproduce la grabadora",
-        "Ve al escritorio y busca la nota en el estante",
+        "Ve al escritorio y busca la nota en una de las mesas",
         "Ve al sótano y busca la nota en la morgue",
         "Ve al segundo piso y busca la nota en el consultorio médico",
         "Ve a la sala del proyector en el 1er piso, ahí encontrarás la llave para salir",
@@ -55,10 +45,7 @@ public class ObjectiveDisplay : MonoBehaviour
             GameFlowController.Instance.StateChanged -= OnStateChanged;
     }
 
-    private void Update()
-    {
-        // El objetivo siempre es visible — no se oculta al examinar ni al abrir inventario.
-    }
+    private void Update(){}
 
     private void OnStateChanged(GameFlowState state)
     {
@@ -74,21 +61,18 @@ public class ObjectiveDisplay : MonoBehaviour
         }
     }
 
-    /// <summary>Muestra un texto personalizado (para notas con texto fijo).</summary>
     public void SetText(string text)
     {
         if (objectiveText != null)
             objectiveText.text = text;
     }
 
-    /// <summary>Avanza al siguiente objetivo.</summary>
     public void NextObjective()
     {
         _currentIndex = Mathf.Min(_currentIndex + 1, objectives.Length - 1);
         ShowObjectiveAtIndex(_currentIndex);
     }
 
-    /// <summary>Salta a un objetivo específico por índice.</summary>
     public void SetObjective(int index)
     {
         _currentIndex = Mathf.Clamp(index, 0, objectives.Length - 1);
@@ -111,8 +95,6 @@ public class ObjectiveDisplay : MonoBehaviour
 
     private void SetVisible(bool visible)
     {
-        // NUNCA desactivar el propio GameObject (Update() dejaría de correr).
-        // Siempre usar el root panel o el TMP_Text directamente.
         if (root != null)
             root.SetActive(visible);
         else if (objectiveText != null)

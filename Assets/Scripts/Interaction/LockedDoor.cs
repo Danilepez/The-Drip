@@ -11,11 +11,9 @@ public class LockedDoor : MonoBehaviour
     public BaseDoorController doorController;
 
     [Header("Entrance Door (se desbloquea al recoger la nota)")]
-    [Tooltip("Puerta fisica de entrada a la sala. Llama UnlockEntrance() desde onCollected de la nota.")]
     public BaseDoorController entranceDoor;
 
     [Header("Minigame Items")]
-    [Tooltip("Ya no se usa — el puzzle de cajones lo maneja DrawerPuzzleManager.")]
     public CollectibleItem[] itemsToCollect;
 
     [Header("Trigger")]
@@ -42,20 +40,12 @@ public class LockedDoor : MonoBehaviour
         if (doorController != null)
             doorController.enabled = true;
 
-        // La puerta de entrada empieza bloqueada hasta que la nota la desbloquee
         if (entranceDoor != null)
             entranceDoor.isLocked = true;
     }
 
-    private void Update()
-    {
-        // La completación ahora la maneja DrawerPuzzleManager (llama CompleteMinigame() al recoger la llave)
-    }
+    private void Update(){}
 
-    /// <summary>
-    /// Llamar desde el onCollected de la nota del escritorio.
-    /// Desbloquea la puerta de entrada a la safe room.
-    /// </summary>
     public void UnlockEntrance()
     {
         if (entranceDoor != null)
@@ -65,10 +55,6 @@ public class LockedDoor : MonoBehaviour
         }
     }
 
-    /// <summary>
-    /// Llamado directamente por GameFlowController.EnterSafeRoom().
-    /// No usa OnTriggerEnter para evitar condiciones de carrera con SafeRoomZone.
-    /// </summary>
     public void BeginMinigame()
     {
         if (_minigameStarted) return;
@@ -112,9 +98,6 @@ public class LockedDoor : MonoBehaviour
         CompleteMinigame();
     }
 
-    /// <summary>
-    /// Llamar desde onCollected de la llave (via Inspector) para desbloquear la puerta y activar FinalChase.
-    /// </summary>
     public void CompleteMinigame()
     {
         _minigameComplete = true;

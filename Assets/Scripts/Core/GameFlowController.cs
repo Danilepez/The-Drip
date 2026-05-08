@@ -15,6 +15,7 @@ public enum GameFlowState
     FinalChase
 }
 
+[DefaultExecutionOrder(100)]
 public class GameFlowController : MonoBehaviour
 {
     public static GameFlowController Instance { get; private set; }
@@ -42,7 +43,6 @@ public class GameFlowController : MonoBehaviour
     public RecorderInteractable recorder;
     public bool waitForRecorder = true;
     public float recorderCooldownSeconds = 10f;
-    [Tooltip("Collider invisible que bloquea el paso hasta que termine el audio de la grabadora.")]
     public Collider introBarrier;
 
     [Header("Recovery")]
@@ -84,7 +84,6 @@ public class GameFlowController : MonoBehaviour
         if (waitForRecorder && recorder != null)
         {
             SetState(GameFlowState.Intro);
-            // Activar barrera al inicio
             if (introBarrier != null) introBarrier.enabled = true;
             return;
         }
@@ -237,13 +236,11 @@ public class GameFlowController : MonoBehaviour
         enemyDirector?.StopHunt();
         SetState(GameFlowState.SafeRoom);
 
-        // Activar minijuego directamente — sin depender de OnTriggerEnter
         safeRoomDoor?.BeginMinigame();
     }
 
     public void ExitSafeRoom()
     {
-        // Blocked while minigame is in progress (door is physically locked too)
         if (CurrentState == GameFlowState.SafeRoomMinigame) return;
         if (CurrentState != GameFlowState.SafeRoom) return;
 
@@ -253,7 +250,6 @@ public class GameFlowController : MonoBehaviour
         }
         else
         {
-            // Fallback: minigame not done, just return to exploration
             SetState(GameFlowState.Exploration);
             StartSpawnCycle();
         }
@@ -265,13 +261,10 @@ public class GameFlowController : MonoBehaviour
         StopTimer();
         SetState(GameFlowState.FinalChase);
 
-        // Activate main enemy
         enemyDirector?.StartHunt();
 
-        // Activate doll
         DollController doll = dollController != null ? dollController : DollController.Instance;
 
-        // Teleportar muñeca a su spawn de FinalChase antes de activarla
         doll?.WarpToSpawnPoint();
         doll?.Activate();
 
@@ -283,10 +276,8 @@ public class GameFlowController : MonoBehaviour
         if (!waitForRecorder) return;
         if (CurrentState != GameFlowState.Intro) return;
 
-        // Avanzar objetivo (grabadora terminó → ir al escritorio)
         ObjectiveDisplay.Instance?.NextObjective();
 
-        // Audio terminó → desactivar barrera inmediatamente
         if (introBarrier != null)
         {
             introBarrier.enabled = false;

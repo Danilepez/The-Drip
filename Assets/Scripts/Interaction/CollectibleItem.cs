@@ -46,7 +46,6 @@ public class CollectibleItem : MonoBehaviour
 
     private void Start()
     {
-        // Buscar cámara con múltiples fallbacks
         PlayerLook pl = FindAnyObjectByType<PlayerLook>();
         if (pl != null) _cam = pl.GetComponentInChildren<Camera>();
         if (_cam == null) _cam = Camera.main;
@@ -54,7 +53,6 @@ public class CollectibleItem : MonoBehaviour
         ConfigureDefaultMask();
         CacheCollectMasks();
 
-        // --- DEBUG EXHAUSTIVO ---
         Collider rootCol = GetComponent<Collider>();
         Collider childCol = GetComponentInChildren<Collider>();
         bool actionEnabled = collectAction != null && collectAction.action != null && collectAction.action.enabled;
@@ -149,7 +147,6 @@ public class CollectibleItem : MonoBehaviour
 
         if (hits.Length == 0)
         {
-            // Log solo cuando el objeto debería ser visible (está activo y cerca)
             if (gameObject.activeInHierarchy)
                 Debug.DrawRay(ray.origin, ray.direction * lookRange, Color.red);
             return false;
@@ -157,7 +154,6 @@ public class CollectibleItem : MonoBehaviour
 
         Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
 
-        // Log exhaustivo de todos los hits para diagnosticar bloqueos
         if (!_isLookedAt && _debugRayOnce)
         {
             _debugRayOnce = false;
@@ -173,7 +169,7 @@ public class CollectibleItem : MonoBehaviour
             if (owner == this)
             {
                 hit = h;
-                _debugRayOnce = true; // resetear para el próximo ciclo
+                _debugRayOnce = true;
                 return true;
             }
 

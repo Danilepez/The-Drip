@@ -127,16 +127,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BloodInteractable
   interactAction: {fileID: -7951758805681143802, guid: 052faaac586de48259a63d0c4782560b, type: 3}
-  screamClip: {fileID: 8300000, guid: c76ffa85652999543b3a9943d58ece61, type: 3}
   lookRange: 2
   dripSource: {fileID: -7578744418835768437}
   dripClip: {fileID: 8300000, guid: c7da598163611a34fbe4a3143479c12a, type: 3}
   playDripOnStart: 1
   loopDrip: 1
   stopDripOnPhoto: 1
-  startTimerOnStart: 1
-  timerSeconds: 60
-  stopTimerOnPhoto: 1
+  startActive: 0
+  hideOnDeactivate: 1
+  visualRoot: {fileID: 0}
+  visualRenderers: []
 --- !u!82 &-7578744418835768437
 AudioSource:
   m_ObjectHideFlags: 0
@@ -149,7 +149,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

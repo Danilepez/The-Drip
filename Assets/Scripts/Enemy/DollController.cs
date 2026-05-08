@@ -11,7 +11,6 @@ public class DollController : BaseEnemy
     public float rotationSpeed = 8f;
 
     [Header("FinalChase Respawn")]
-    [Tooltip("Posición donde spawnear la muñeca al inicio del FinalChase. Si es null usa su posición actual.")]
     public Transform spawnPoint;
 
     private Renderer[] _renderers;
@@ -25,14 +24,12 @@ public class DollController : BaseEnemy
 
     public override void Activate()
     {
-        // Asegurarse de que el GameObject esté activo (puede haber sido desactivado al salir de SafeRoom)
         if (!gameObject.activeSelf)
             gameObject.SetActive(true);
 
         base.Activate();
     }
 
-    /// <summary>Teletransporta la muñeca al spawnPoint asignado (llamado desde GameFlowController).</summary>
     public void WarpToSpawnPoint()
     {
         if (spawnPoint == null) return;
@@ -55,6 +52,7 @@ public class DollController : BaseEnemy
     private void Update()
     {
         if (!IsActive || player == null) return;
+        if (!Agent.isOnNavMesh) return;
 
         AttackTimer -= Time.deltaTime;
 
@@ -64,8 +62,6 @@ public class DollController : BaseEnemy
         {
             Agent.isStopped = true;
             Agent.velocity  = Vector3.zero;
-            // Anim?.SetBool("isRunning", false);
-            // Anim?.SetFloat("speed", 0f);
             return;
         }
 
@@ -76,16 +72,11 @@ public class DollController : BaseEnemy
         if (dist <= attackDistance)
         {
             Agent.ResetPath();
-            // Anim?.SetBool("isRunning", false);
-            // Anim?.SetFloat("speed", 0f);
             TryAttack();
         }
         else
         {
             Agent.destination = player.position;
-            float velocity = Agent.velocity.magnitude;
-            // Anim?.SetBool("isRunning", false);
-            // Anim?.SetFloat("speed", velocity);
         }
     }
 

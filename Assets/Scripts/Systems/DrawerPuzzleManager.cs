@@ -1,15 +1,6 @@
 using UnityEngine;
 
-/// <summary>
-/// Puzzle de cajones: ganas cuando TODOS los cajones correctos están abiertos
-/// Y NINGÚNo de los incorrectos está abierto.
-///
-/// Setup en Inspector:
-///  - correctDrawers[]   → los cajones que deben estar abiertos (los que indica la pizarra)
-///  - incorrectDrawers[] → todos los demás cajones de la sala (los que NO deben abrirse)
-///  - keyObject          → GameObject de la llave, empieza desactivado
-///  - audioSource + completionClip → sonido al completar (opcional)
-/// </summary>
+
 public class DrawerPuzzleManager : MonoBehaviour
 {
     [Header("Cajones correctos (los que indica la pizarra)")]
@@ -19,7 +10,6 @@ public class DrawerPuzzleManager : MonoBehaviour
     public DrawerController[] incorrectDrawers;
 
     [Header("Llave")]
-    [Tooltip("GameObject de la llave (CollectibleItem). Empieza desactivado en la escena.")]
     public GameObject keyObject;
 
     [Header("Audio (opcional)")]
@@ -47,7 +37,6 @@ public class DrawerPuzzleManager : MonoBehaviour
 
     private bool IsSolved()
     {
-        // Todos los cajones correctos deben estar abiertos
         if (correctDrawers != null)
         {
             foreach (DrawerController d in correctDrawers)
@@ -57,7 +46,6 @@ public class DrawerPuzzleManager : MonoBehaviour
             }
         }
 
-        // Ningún cajón incorrecto puede estar abierto
         if (incorrectDrawers != null)
         {
             foreach (DrawerController d in incorrectDrawers)

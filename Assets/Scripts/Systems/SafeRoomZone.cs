@@ -21,10 +21,8 @@ public class SafeRoomZone : MonoBehaviour
 
     private bool IsPlayer(Collider other)
     {
-        // Primero intenta por tag
         if (other.CompareTag(playerTag)) return true;
 
-        // Fallback: busca PlayerMovement en el objeto o sus padres
         if (other.GetComponentInParent<PlayerMovement>() != null) return true;
 
         return false;

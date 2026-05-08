@@ -70,7 +70,7 @@ public class InventoryManager : MonoBehaviour
     public void Close()
     {
         IsOpen = false;
-        ItemDetailUI.Instance.Hide();
+        ItemDetailUI.Instance?.Hide();
         inventoryPanel.SetActive(false);
 
         Time.timeScale = 1f;

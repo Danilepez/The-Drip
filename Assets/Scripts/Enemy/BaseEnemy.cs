@@ -31,8 +31,11 @@ public abstract class BaseEnemy : MonoBehaviour
     public virtual void Deactivate()
     {
         IsActive = false;
-        Agent.ResetPath();
-        Agent.isStopped = true;
+        if (Agent.isOnNavMesh)
+        {
+            Agent.ResetPath();
+            Agent.isStopped = true;
+        }
         foreach (var r in GetComponentsInChildren<Renderer>())
             r.enabled = false;
     }
@@ -50,7 +53,6 @@ public abstract class BaseEnemy : MonoBehaviour
     }
 
     [Header("Attack Look")]
-    [Tooltip("Offset vertical desde la posición del enemigo para apuntar a su cara (ej. 1.6 = altura de ojos).")]
     public float faceHeight = 1.6f;
 
     [Header("Sonido de Captura")]
@@ -63,11 +65,9 @@ public abstract class BaseEnemy : MonoBehaviour
         AttackTimer = attackCooldown;
         Anim?.SetTrigger("attack");
 
-        // Forzar cámara a mirar la cara del enemigo
         Vector3 faceTarget = transform.position + Vector3.up * faceHeight;
         PlayerLook.ForceLookAt(faceTarget);
 
-        // Sonido de captura (2D, sin atenuación espacial)
         if (captureSound != null)
         {
             var go = new GameObject("_CaptureSound");

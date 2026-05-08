@@ -27,7 +27,6 @@ public class DoorController : BaseDoorController
         RefreshHint();
         ApplyNavObstacleState(isOpen);
 
-        // Reproducir sonido al inicio del movimiento
         AudioClip clip = isOpen ? openClip : closeClip;
         if (clip != null)
         {

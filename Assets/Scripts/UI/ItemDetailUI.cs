@@ -16,10 +16,15 @@ public class ItemDetailUI : MonoBehaviour
     public float minDescriptionHeight = 0f;
     public float maxDescriptionHeight = 0f;
 
+    [Header("Botón cerrar")]
+    public Button closeButton;
+
     private void Awake()
     {
+        if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        detailPanel.SetActive(false);
+        if (detailPanel != null) detailPanel.SetActive(false);
+        closeButton?.onClick.AddListener(Hide);
     }
 
     public void Show(ItemData data)
