@@ -10,7 +10,9 @@ public enum GameFlowState
     Hunt,
     HideCountdown,
     Recovery,
-    SafeRoom
+    SafeRoom,
+    SafeRoomMinigame,
+    FinalChase
 }
 
 public class GameFlowController : MonoBehaviour
@@ -29,6 +31,12 @@ public class GameFlowController : MonoBehaviour
 
     [Header("Enemy")]
     public EnemyDirector enemyDirector;
+
+    [Header("Safe Room")]
+    public LockedDoor safeRoomDoor;
+
+    [Header("Final Chase")]
+    public DollController dollController;
 
     [Header("Intro")]
     public RecorderInteractable recorder;
@@ -49,6 +57,7 @@ public class GameFlowController : MonoBehaviour
     private int _lastSpawnIndex = -1;
     private Coroutine _recoveryRoutine;
     private Coroutine _introRoutine;
+    private bool _minigameWasCompleted;
 
     private void Awake()
     {
@@ -114,6 +123,12 @@ public class GameFlowController : MonoBehaviour
             enemyDirector.HiddenTimerCompleted += HandleHiddenTimerCompleted;
         }
 
+        if (safeRoomDoor != null)
+        {
+            safeRoomDoor.MinigameStarted += HandleMinigameStarted;
+            safeRoomDoor.MinigameCompleted += HandleMinigameCompleted;
+        }
+
         if (bloodTimerUI != null)
         {
             bloodTimerUI.TimerElapsed += HandleTimerElapsed;
@@ -144,6 +159,12 @@ public class GameFlowController : MonoBehaviour
         {
             enemyDirector.VisibilityChanged -= HandleEnemyVisibility;
             enemyDirector.HiddenTimerCompleted -= HandleHiddenTimerCompleted;
+        }
+
+        if (safeRoomDoor != null)
+        {
+            safeRoomDoor.MinigameStarted -= HandleMinigameStarted;
+            safeRoomDoor.MinigameCompleted -= HandleMinigameCompleted;
         }
 
         if (bloodTimerUI != null)
@@ -198,7 +219,7 @@ public class GameFlowController : MonoBehaviour
 
     public void EnterSafeRoom()
     {
-        if (CurrentState == GameFlowState.SafeRoom) return;
+        if (CurrentState == GameFlowState.SafeRoom || CurrentState == GameFlowState.SafeRoomMinigame) return;
 
         StopTimer();
         StopSpawnCycle();
@@ -215,9 +236,36 @@ public class GameFlowController : MonoBehaviour
 
     public void ExitSafeRoom()
     {
+        // Blocked while minigame is in progress (door is physically locked too)
+        if (CurrentState == GameFlowState.SafeRoomMinigame) return;
         if (CurrentState != GameFlowState.SafeRoom) return;
-        SetState(GameFlowState.Exploration);
-        StartSpawnCycle();
+
+        if (_minigameWasCompleted)
+        {
+            StartFinalChase();
+        }
+        else
+        {
+            // Fallback: minigame not done, just return to exploration
+            SetState(GameFlowState.Exploration);
+            StartSpawnCycle();
+        }
+    }
+
+    public void StartFinalChase()
+    {
+        StopSpawnCycle();
+        StopTimer();
+        SetState(GameFlowState.FinalChase);
+
+        // Activate main enemy
+        enemyDirector?.StartHunt();
+
+        // Activate doll
+        DollController doll = dollController != null ? dollController : DollController.Instance;
+        doll?.Activate();
+
+        Debug.Log("[GameFlow] FinalChase — ambos enemigos activos. ¡Corre!");
     }
 
     private void HandleRecorderFinished()
@@ -297,6 +345,21 @@ public class GameFlowController : MonoBehaviour
     {
         if (CurrentState != GameFlowState.Hunt && CurrentState != GameFlowState.HideCountdown) return;
         BeginRecovery();
+    }
+
+    private void HandleMinigameStarted()
+    {
+        EnterSafeRoom();
+        SetState(GameFlowState.SafeRoomMinigame);
+    }
+
+    private void HandleMinigameCompleted()
+    {
+        if (CurrentState == GameFlowState.SafeRoomMinigame)
+        {
+            _minigameWasCompleted = true;
+            SetState(GameFlowState.SafeRoom);
+        }
     }
 
     private void BeginRecovery()

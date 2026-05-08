@@ -15,6 +15,9 @@ public abstract class BaseInteractable : MonoBehaviour
     private bool _isLookedAt = false;
     private Highlightable _highlightable;
 
+    /// <summary>Bloquea la interacción sin deshabilitar el componente ni el InputAction.</summary>
+    public bool isLocked = false;
+
     protected virtual void OnEnable()  => interactAction?.action?.Enable();
     protected virtual void OnDisable() => interactAction?.action?.Disable();
 
@@ -95,6 +98,7 @@ public abstract class BaseInteractable : MonoBehaviour
     private void TryInteract()
     {
         if (!_isLookedAt) return;
+        if (isLocked) return;
         if (requireExamineMode && !ExamineManager.IsExamining) return;
         if (interactAction == null || !interactAction.action.WasPressedThisFrame()) return;
 

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 public class CollectibleItem : MonoBehaviour
@@ -10,6 +11,9 @@ public class CollectibleItem : MonoBehaviour
     public float lookRange = 3f;
     public LayerMask collectMask = ~0;
     public bool allowPickupWhileExamining = true;
+
+    [Header("Events")]
+    public UnityEvent onCollected;
 
     [Header("Highlight")]
     public bool useHighlight = true;
@@ -164,6 +168,7 @@ public class CollectibleItem : MonoBehaviour
             Debug.Log("[Collectible] F presionado → recogiendo.");
             InputHintsUI.Instance?.SetPickupHint(this, false);
             InventoryManager.Instance?.AddItem(itemData, quantity);
+            onCollected?.Invoke();
             Destroy(gameObject);
         }
     }

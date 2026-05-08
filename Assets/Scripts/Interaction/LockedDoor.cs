@@ -1,13 +1,25 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
 public class LockedDoor : MonoBehaviour
 {
+    public event Action MinigameStarted;
+    public event Action MinigameCompleted;
+
     [Header("Door")]
     public BaseDoorController doorController;
 
+    [Header("Entrance Door (se desbloquea al recoger la nota)")]
+    [Tooltip("Puerta fisica de entrada a la sala. Llama UnlockEntrance() desde onCollected de la nota.")]
+    public BaseDoorController entranceDoor;
+
     [Header("Minigame Items")]
     public CollectibleItem[] itemsToCollect;
+
+    [Header("Debug")]
+    [Tooltip("Activa esto para saltar el minijuego durante pruebas (sin Simon Says implementado).")]
+    public bool debugSkipMinigame = false;
 
     [Header("Trigger")]
     public string playerTag = "Player";
@@ -32,6 +44,10 @@ public class LockedDoor : MonoBehaviour
     {
         if (doorController != null)
             doorController.enabled = true;
+
+        // La puerta de entrada empieza bloqueada hasta que la nota la desbloquee
+        if (entranceDoor != null)
+            entranceDoor.isLocked = true;
     }
 
     private void Update()
@@ -47,9 +63,24 @@ public class LockedDoor : MonoBehaviour
         StartMinigame();
     }
 
+    /// <summary>
+    /// Llamar desde el onCollected de la nota del escritorio.
+    /// Desbloquea la puerta de entrada a la safe room.
+    /// </summary>
+    public void UnlockEntrance()
+    {
+        if (entranceDoor != null)
+        {
+            entranceDoor.isLocked = false;
+            Debug.Log("[LockedDoor] Entrada a la safe room desbloqueada.");
+        }
+    }
+
     private void StartMinigame()
     {
         _minigameStarted = true;
+
+        MinigameStarted?.Invoke();
 
         if (doorController != null)
         {
@@ -60,7 +91,21 @@ public class LockedDoor : MonoBehaviour
 
         DollController.Instance?.Activate();
 
+        if (debugSkipMinigame)
+        {
+            Debug.Log("[LockedDoor] debugSkipMinigame activo — completando minijuego al instante.");
+            StartCoroutine(DebugCompleteRoutine());
+            return;
+        }
+
         Debug.Log("[LockedDoor] Minigame started — door closed + locked, Doll activated.");
+    }
+
+    private IEnumerator DebugCompleteRoutine()
+    {
+        // Espera a que la puerta termine de cerrarse antes de completar
+        yield return new WaitForSeconds(closeDelay + 0.5f);
+        CompleteMinigame();
     }
 
     private IEnumerator CloseAfterDelay()
@@ -72,6 +117,8 @@ public class LockedDoor : MonoBehaviour
 
     private void CheckCompletion()
     {
+        if (itemsToCollect == null || itemsToCollect.Length == 0) return;
+
         foreach (CollectibleItem item in itemsToCollect)
         {
             if (item != null) return;
@@ -83,6 +130,8 @@ public class LockedDoor : MonoBehaviour
     private void CompleteMinigame()
     {
         _minigameComplete = true;
+
+        MinigameCompleted?.Invoke();
 
         if (doorController != null)
             doorController.enabled = true;

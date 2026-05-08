@@ -15,7 +15,7 @@ public class BloodInteractable : MonoBehaviour
     public bool stopDripOnPhoto = true;
 
     [Header("State")]
-    public bool startActive = true;
+    public bool startActive = false;
 
     [Header("Visuals")]
     public bool hideOnDeactivate = true;

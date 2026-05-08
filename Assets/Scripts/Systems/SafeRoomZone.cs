@@ -4,7 +4,6 @@ public class SafeRoomZone : MonoBehaviour
 {
     public bool requirePlayerTag = true;
     public string playerTag = "Player";
-    public bool exitReturnsToExploration = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +13,6 @@ public class SafeRoomZone : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (!exitReturnsToExploration) return;
         if (!IsPlayer(other)) return;
         GameFlowController.Instance?.ExitSafeRoom();
     }
