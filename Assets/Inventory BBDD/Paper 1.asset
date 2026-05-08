@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 1
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Si encuentras esto bajo la mirada inerte de Santa Clara, debes
-    saber que El\xEDas Thorne no muri\xF3 de viejo; lo usaron como rata de laboratorio.
-    Empec\xE9 a reunir los viales vac\xEDos que prueban el envenenamiento, pero los
-    ruidos extra\xF1os en estos pasillos me obligaron a moverme r\xE1pido. Tuve que
-    subir al segundo piso; dej\xE9 las pruebas escondidas entre la tela limpia del
-    estante de s\xE1banas que est\xE1 dentro de la sala de cirug\xEDa. Sube con cuidado,
-    las luces parpadean sin raz\xF3n aparente y siento que la casa respira."
+  itemDescription: "Estos reportes iniciales no muestran el cuadro completo. El resto
+    de los expedientes m\xE9dicos fueron trasladados al s\xF3tano cuando el ala fue
+    clausurada. Tengo que bajar a la morgue, debe haber otro documento archivado
+    ah\xED abajo."
   itemType: 0

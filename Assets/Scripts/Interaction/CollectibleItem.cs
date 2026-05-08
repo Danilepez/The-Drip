@@ -12,6 +12,9 @@ public class CollectibleItem : MonoBehaviour
     public LayerMask collectMask = ~0;
     public bool allowPickupWhileExamining = true;
 
+    [Header("Sonido")]
+    public AudioClip pickupSound;
+
     [Header("Events")]
     public UnityEvent onCollected;
 
@@ -25,6 +28,7 @@ public class CollectibleItem : MonoBehaviour
 
     private Camera _cam;
     private bool _isLookedAt;
+    private bool _debugRayOnce = true;
     private int _baseCollectMask;
     private int _collectMaskWithExamine;
     private int _examineLayer;
@@ -42,11 +46,31 @@ public class CollectibleItem : MonoBehaviour
 
     private void Start()
     {
+        // Buscar cámara con múltiples fallbacks
         PlayerLook pl = FindAnyObjectByType<PlayerLook>();
-        _cam = pl != null ? pl.GetComponentInChildren<Camera>() : Camera.main;
+        if (pl != null) _cam = pl.GetComponentInChildren<Camera>();
+        if (_cam == null) _cam = Camera.main;
+        if (_cam == null) _cam = FindAnyObjectByType<Camera>();
         ConfigureDefaultMask();
         CacheCollectMasks();
-        Debug.Log($"[Collectible] '{gameObject.name}' Start. cam={(_cam == null ? "NULL" : _cam.name)} | collectAction={( collectAction == null ? "NULL" : collectAction.action.name)} | collider={GetComponent<Collider>() != null}");
+
+        // --- DEBUG EXHAUSTIVO ---
+        Collider rootCol = GetComponent<Collider>();
+        Collider childCol = GetComponentInChildren<Collider>();
+        bool actionEnabled = collectAction != null && collectAction.action != null && collectAction.action.enabled;
+        Debug.Log($"[Collectible] '{gameObject.name}' Start.\n" +
+                  $"  cam={(_cam == null ? "NULL" : _cam.name)}\n" +
+                  $"  collectAction={( collectAction == null ? "NULL" : collectAction.action.name)} | enabled={actionEnabled}\n" +
+                  $"  collider ROOT={rootCol != null} | collider CHILDREN={childCol != null} (nombre={childCol?.gameObject.name})\n" +
+                  $"  collectMask={collectMask.value} | lookRange={lookRange}\n" +
+                  $"  layer propio={LayerMask.LayerToName(gameObject.layer)}");
+
+        if (rootCol == null && childCol == null)
+            Debug.LogError($"[Collectible] '{gameObject.name}' NO TIENE COLLIDER — el raycast nunca lo detectará.");
+        if (collectAction == null)
+            Debug.LogError($"[Collectible] '{gameObject.name}' collectAction es NULL — asígnalo en el Inspector.");
+        if (collectMask.value == 0)
+            Debug.LogError($"[Collectible] '{gameObject.name}' collectMask=0 (Nothing) — el raycast no verá ninguna capa.");
     }
 
     private void Update()
@@ -122,9 +146,26 @@ public class CollectibleItem : MonoBehaviour
     {
         hit = default;
         RaycastHit[] hits = Physics.RaycastAll(ray, lookRange, mask, QueryTriggerInteraction.Collide);
-        if (hits.Length == 0) return false;
+
+        if (hits.Length == 0)
+        {
+            // Log solo cuando el objeto debería ser visible (está activo y cerca)
+            if (gameObject.activeInHierarchy)
+                Debug.DrawRay(ray.origin, ray.direction * lookRange, Color.red);
+            return false;
+        }
 
         Array.Sort(hits, (a, b) => a.distance.CompareTo(b.distance));
+
+        // Log exhaustivo de todos los hits para diagnosticar bloqueos
+        if (!_isLookedAt && _debugRayOnce)
+        {
+            _debugRayOnce = false;
+            string log = $"[Collectible] '{gameObject.name}' RaycastAll — {hits.Length} hit(s):";
+            foreach (var h in hits)
+                log += $"\n  [{h.distance:F2}m] '{h.collider.gameObject.name}' isTrigger={h.collider.isTrigger} layer={LayerMask.LayerToName(h.collider.gameObject.layer)} hasCollectible={h.collider.GetComponentInParent<CollectibleItem>() != null}";
+            Debug.Log(log);
+        }
 
         foreach (RaycastHit h in hits)
         {
@@ -132,6 +173,7 @@ public class CollectibleItem : MonoBehaviour
             if (owner == this)
             {
                 hit = h;
+                _debugRayOnce = true; // resetear para el próximo ciclo
                 return true;
             }
 
@@ -148,15 +190,6 @@ public class CollectibleItem : MonoBehaviour
     {
         if (!_isLookedAt) return;
 
-        if (itemData != null && itemData.itemType == ItemData.ItemType.Key)
-        {
-            if (!BloodInteractable.HasAllBloodPhotos)
-            {
-                Debug.Log("[Collectible] Necesitas fotografiar 2 manchas de sangre antes de recoger la llave.");
-                return;
-            }
-        }
-
         if (collectAction == null)
         {
             Debug.LogError("[Collectible] collectAction es NULL.");
@@ -167,6 +200,14 @@ public class CollectibleItem : MonoBehaviour
         {
             Debug.Log("[Collectible] F presionado → recogiendo.");
             InputHintsUI.Instance?.SetPickupHint(this, false);
+            if (pickupSound != null)
+            {
+                var go = new GameObject("_PickupOneShot");
+                var src = go.AddComponent<AudioSource>();
+                src.spatialBlend = 0f;
+                src.PlayOneShot(pickupSound);
+                Destroy(go, pickupSound.length + 0.1f);
+            }
             InventoryManager.Instance?.AddItem(itemData, quantity);
             onCollected?.Invoke();
             Destroy(gameObject);

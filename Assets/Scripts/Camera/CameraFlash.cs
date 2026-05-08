@@ -9,6 +9,10 @@ public class CameraFlash : MonoBehaviour
     public Image flashImage;
     public float flashDuration = 0.35f;
 
+    [Header("Sonido de foto")]
+    public AudioSource audioSource;
+    public AudioClip photoSound;
+
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
@@ -19,12 +23,18 @@ public class CameraFlash : MonoBehaviour
     {
         if (flashImage != null)
             flashImage.color = Color.clear;
+
+        if (audioSource == null)
+            audioSource = GetComponent<AudioSource>();
     }
 
     public void TriggerFlash()
     {
         StopAllCoroutines();
         StartCoroutine(Flash());
+
+        if (audioSource != null && photoSound != null)
+            audioSource.PlayOneShot(photoSound);
     }
 
     private IEnumerator Flash()

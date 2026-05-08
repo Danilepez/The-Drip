@@ -7,6 +7,10 @@ public class DrawerController : BaseInteractable
     public Vector3 openOffset = new Vector3(0f, 0f, -0.4f);
     public bool isOpen = false;
 
+    [Header("Sonidos")]
+    public AudioClip openClip;
+    public AudioClip closeClip;
+
     private Vector3 _closedLocalPosition;
     private Vector3 _openLocalPosition;
 
@@ -21,6 +25,18 @@ public class DrawerController : BaseInteractable
         Vector3 targetPosition = isOpen ? _closedLocalPosition : _openLocalPosition;
         isOpen = !isOpen;
         RefreshHint();
+
+        // Reproducir sonido
+        AudioClip clip = isOpen ? openClip : closeClip;
+        if (clip != null)
+        {
+            var go = new GameObject("_DrawerSound");
+            go.transform.position = transform.position;
+            var src = go.AddComponent<AudioSource>();
+            src.spatialBlend = 1f;
+            src.PlayOneShot(clip);
+            Destroy(go, clip.length + 0.1f);
+        }
 
         while (Vector3.Distance(transform.localPosition, targetPosition) > 0.001f)
         {

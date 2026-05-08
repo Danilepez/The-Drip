@@ -28,6 +28,15 @@ public abstract class BaseEnemy : MonoBehaviour
         IsActive = true;
     }
 
+    public virtual void Deactivate()
+    {
+        IsActive = false;
+        Agent.ResetPath();
+        Agent.isStopped = true;
+        foreach (var r in GetComponentsInChildren<Renderer>())
+            r.enabled = false;
+    }
+
     protected virtual void Start()
     {
         if (player == null)
@@ -40,6 +49,13 @@ public abstract class BaseEnemy : MonoBehaviour
             r.enabled = false;
     }
 
+    [Header("Attack Look")]
+    [Tooltip("Offset vertical desde la posición del enemigo para apuntar a su cara (ej. 1.6 = altura de ojos).")]
+    public float faceHeight = 1.6f;
+
+    [Header("Sonido de Captura")]
+    public AudioClip captureSound;
+
     protected void TryAttack()
     {
         if (AttackTimer > 0f) return;
@@ -47,13 +63,22 @@ public abstract class BaseEnemy : MonoBehaviour
         AttackTimer = attackCooldown;
         Anim?.SetTrigger("attack");
 
+        // Forzar cámara a mirar la cara del enemigo
+        Vector3 faceTarget = transform.position + Vector3.up * faceHeight;
+        PlayerLook.ForceLookAt(faceTarget);
+
+        // Sonido de captura (2D, sin atenuación espacial)
+        if (captureSound != null)
+        {
+            var go = new GameObject("_CaptureSound");
+            var src = go.AddComponent<AudioSource>();
+            src.spatialBlend = 0f;
+            src.PlayOneShot(captureSound);
+            Destroy(go, captureSound.length + 0.1f);
+        }
+
         PlayerLook.IsFrozen = true;
         PlayerMovement.IsFrozen = true;
-
-        Vector3 dir = transform.position - player.position;
-        dir.y = 0f;
-        if (dir.sqrMagnitude > 0.001f)
-            player.rotation = Quaternion.LookRotation(dir);
 
         StartCoroutine(LoseAfterDelay(3f));
     }

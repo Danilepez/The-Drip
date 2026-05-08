@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 2
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Alguien casi me descubre en la sala de cirug\xEDa, la opresi\xF3n
-    en el aire se siente cada vez m\xE1s pesada y el goteo constante me est\xE1 enloqueciendo.
-    Las notas originales del m\xE9dico forense, las que confirman el horror que vivi\xF3
-    El\xEDas, no pod\xEDan quedarse aqu\xED. Me escabull\xED hasta la oficina principal,
-    tambi\xE9n aqu\xED en este segundo piso, y dej\xE9 el reporte tirado a simple
-    vista, justo encima del escritorio. T\xF3malo r\xE1pido, y si escuchas una camilla
-    rodando por el pasillo, esc\xF3ndete de inmediato."
+  itemDescription: "Las autopsias mencionan una toxina en la sangre de los pacientes.
+    Quiz\xE1s la administraban a trav\xE9s de la comida. Subir\xE9 al segundo piso
+    para investigar. Si no logro volver, dejar\xE9 mis siguientes hallazgos en la
+    cocina, justo encima del refrigerador."
   itemType: 0

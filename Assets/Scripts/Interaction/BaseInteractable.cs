@@ -65,6 +65,7 @@ public abstract class BaseInteractable : MonoBehaviour
 
         Ray ray = new Ray(_cam.transform.position, _cam.transform.forward);
 
+        // Ignorar triggers — los colliders físicos de puertas/cajones no deben ser triggers
         if (Physics.Raycast(ray, out RaycastHit hit, lookRange, interactMask, QueryTriggerInteraction.Ignore))
         {
             bool hitThis = hit.collider.GetComponentInParent<BaseInteractable>() == this;
@@ -82,15 +83,24 @@ public abstract class BaseInteractable : MonoBehaviour
         _isLookedAt = isLookedAt;
         _highlightable?.SetHighlighted(isLookedAt);
 
+        if (isLookedAt)
+            Debug.Log($"[BaseInteractable] Mirando '{gameObject.name}' | isLocked={isLocked} | requireExamine={requireExamineMode} | action={(interactAction == null ? "NULL" : interactAction.action.name)} | actionEnabled={interactAction?.action?.enabled}");
+
         if (showHint)
         {
             bool isOpen;
             bool hasState = TryGetOpenState(out isOpen);
             if (!hasState) isOpen = false;
-            InputHintsUI.Instance?.SetDoorHint(this, isLookedAt, isOpen);
+            ShowInteractHint(isLookedAt, isOpen);
         }
 
         if (!isLookedAt) HintTextUI.Instance?.Hide(this);
+    }
+
+    /// <summary>Sobrescribir en subclases para mostrar un hint diferente (ej. Grabadora).</summary>
+    protected virtual void ShowInteractHint(bool isLookedAt, bool isOpen)
+    {
+        InputHintsUI.Instance?.SetDoorHint(this, isLookedAt, isOpen);
     }
 
     protected void RefreshHint()
@@ -100,15 +110,35 @@ public abstract class BaseInteractable : MonoBehaviour
         bool isOpen;
         bool hasState = TryGetOpenState(out isOpen);
         if (!hasState) isOpen = false;
-        InputHintsUI.Instance?.SetDoorHint(this, true, isOpen);
+        ShowInteractHint(true, isOpen);
     }
 
     private void TryInteract()
     {
         if (!_isLookedAt) return;
-        if (isLocked) return;
-        if (requireExamineMode && !ExamineManager.IsExamining) return;
-        if (interactAction == null || !interactAction.action.WasPressedThisFrame()) return;
+        if (isLocked)
+        {
+            if (interactAction != null && interactAction.action.WasPressedThisFrame())
+                Debug.Log($"[BaseInteractable] '{gameObject.name}' BLOQUEADO (isLocked=true)");
+            return;
+        }
+        if (requireExamineMode && !ExamineManager.IsExamining)
+        {
+            if (interactAction != null && interactAction.action.WasPressedThisFrame())
+                Debug.Log($"[BaseInteractable] '{gameObject.name}' requiere ExamineMode");
+            return;
+        }
+        if (interactAction == null)
+        {
+            Debug.LogError($"[BaseInteractable] '{gameObject.name}' — interactAction es NULL. Asígnalo en el Inspector.");
+            return;
+        }
+        if (!interactAction.action.enabled)
+        {
+            Debug.LogWarning($"[BaseInteractable] '{gameObject.name}' — action '{interactAction.action.name}' está DISABLED.");
+            return;
+        }
+        if (!interactAction.action.WasPressedThisFrame()) return;
 
         if (_currentCoroutine != null) StopCoroutine(_currentCoroutine);
         _currentCoroutine = StartCoroutine(Interact());

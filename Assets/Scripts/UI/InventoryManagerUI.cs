@@ -43,11 +43,16 @@ public class InventoryManagerUI : MonoBehaviour
         for (int i = start; i < end; i++)
         {
             Item item = inventory[i];
+            if (item?.itemData == null) { Debug.LogWarning($"[Inventario] Item en índice {i} tiene itemData=null, ignorando."); continue; }
+            if (itemSlotPrefab == null) { Debug.LogError("[Inventario] itemSlotPrefab no asignado en InventoryManagerUI."); break; }
+
             GameObject slot = Instantiate(itemSlotPrefab, itemContainer);
             ItemSlotUI slotUI = slot.GetComponent<ItemSlotUI>();
-            slotUI.itemIconImage.sprite = item.itemData.itemIcon;
-            slotUI.itemName.text = item.itemData.itemName;
-            slotUI.itemQuantity.text = "x" + item.itemQuantity;
+            if (slotUI == null) { Debug.LogError($"[Inventario] El prefab '{itemSlotPrefab.name}' no tiene ItemSlotUI."); continue; }
+
+            if (slotUI.itemIconImage != null) slotUI.itemIconImage.sprite = item.itemData.itemIcon;
+            if (slotUI.itemName != null)      slotUI.itemName.text = item.itemData.itemName;
+            if (slotUI.itemQuantity != null)  slotUI.itemQuantity.text = "x" + item.itemQuantity;
             slotUI.Setup(item.itemData);
         }
 

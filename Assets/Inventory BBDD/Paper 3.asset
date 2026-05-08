@@ -14,11 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 3
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "Con estos documentos podr\xEDamos hundir a la farmac\xE9utica,
-    pero me aterra la idea de que nos hayan dejado encerrados a prop\xF3sito. El
-    director cambi\xF3 las contrase\xF1as de las puertas principales, as\xED que
-    tuve que bajar sigilosamente para buscar el c\xF3digo de emergencia. Lo anot\xE9
-    en un pedazo de papel y lo ocult\xE9 en el estante de s\xE1banas de la sala de
-    guardia, abajo en el primer piso. No te demores, el hedor a \xF3xido y humedad
-    en este edificio se est\xE1 volviendo insoportable."
+  itemDescription: "Encontr\xE9 rastros del sedante en las bandejas, pero las recetas
+    m\xE9dicas originales no est\xE1n aqu\xED. Tienen que estar en la puerta de al
+    lado. Debes revisar el consultorio m\xE9dico"
   itemType: 0

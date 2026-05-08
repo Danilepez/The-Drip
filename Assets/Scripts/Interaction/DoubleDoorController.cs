@@ -9,6 +9,10 @@ public class DoubleDoorController : BaseDoorController
     public float leftOpenAngle  = -90f;
     public float rightOpenAngle =  90f;
 
+    [Header("Sonidos")]
+    public AudioClip openClip;
+    public AudioClip closeClip;
+
     private Quaternion _leftClosed,  _leftOpen;
     private Quaternion _rightClosed, _rightOpen;
     private bool _isOpen = false;
@@ -30,6 +34,18 @@ public class DoubleDoorController : BaseDoorController
         _isOpen = !_isOpen;
         RefreshHint();
         ApplyNavObstacleState(_isOpen);
+
+        // Reproducir sonido al inicio del movimiento
+        AudioClip clip = _isOpen ? openClip : closeClip;
+        if (clip != null)
+        {
+            var go = new GameObject("_DoorSound");
+            go.transform.position = transform.position;
+            var src = go.AddComponent<AudioSource>();
+            src.spatialBlend = 1f;
+            src.PlayOneShot(clip);
+            Destroy(go, clip.length + 0.1f);
+        }
 
         while (Quaternion.Angle(leftPivot.rotation,  leftTarget)  > 0.01f ||
                Quaternion.Angle(rightPivot.rotation, rightTarget) > 0.01f)

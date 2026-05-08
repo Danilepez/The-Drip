@@ -14,6 +14,9 @@ public class EnemyController : MonoBehaviour
     public float attackCooldown = 2f;
     [SerializeField] private float _animSpeedMultiplier = 1.8f;
 
+    [Header("Sonido de Captura")]
+    public AudioClip captureSound;
+
     private NavMeshAgent _agent;
     private Animator _anim;
     private float _attackTimer;
@@ -114,6 +117,15 @@ public class EnemyController : MonoBehaviour
         dir.y = 0f;
         if (dir.sqrMagnitude > 0.001f)
             player.rotation = Quaternion.LookRotation(dir);
+
+        if (captureSound != null)
+        {
+            var go = new GameObject("_CaptureSound");
+            var src = go.AddComponent<AudioSource>();
+            src.spatialBlend = 0f;
+            src.PlayOneShot(captureSound);
+            Destroy(go, captureSound.length + 0.1f);
+        }
 
         StartCoroutine(LoseAfterDelay(3f));
     }

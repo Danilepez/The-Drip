@@ -10,6 +10,10 @@ public class DollController : BaseEnemy
     public float moveSpeed = 3f;
     public float rotationSpeed = 8f;
 
+    [Header("FinalChase Respawn")]
+    [Tooltip("Posición donde spawnear la muñeca al inicio del FinalChase. Si es null usa su posición actual.")]
+    public Transform spawnPoint;
+
     private Renderer[] _renderers;
     private Camera _cam;
 
@@ -17,6 +21,23 @@ public class DollController : BaseEnemy
     {
         Instance = this;
         base.Awake();
+    }
+
+    public override void Activate()
+    {
+        // Asegurarse de que el GameObject esté activo (puede haber sido desactivado al salir de SafeRoom)
+        if (!gameObject.activeSelf)
+            gameObject.SetActive(true);
+
+        base.Activate();
+    }
+
+    /// <summary>Teletransporta la muñeca al spawnPoint asignado (llamado desde GameFlowController).</summary>
+    public void WarpToSpawnPoint()
+    {
+        if (spawnPoint == null) return;
+        Agent.Warp(spawnPoint.position);
+        transform.position = spawnPoint.position;
     }
 
     protected override void Start()

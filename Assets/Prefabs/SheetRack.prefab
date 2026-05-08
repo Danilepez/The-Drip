@@ -166,9 +166,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &695120738562923209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -608,9 +612,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &3483899972977792209
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -680,9 +688,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &8506997791446985843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,9 +764,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &2446043141586980120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1216,9 +1232,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &4109551849212620465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1401,9 +1421,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &180018787777036641
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1859,9 +1883,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &6337900609812572002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1931,9 +1959,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &8796429909394466718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2116,9 +2148,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &3937890526515817864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2188,9 +2224,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &8021344911251314490
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2260,9 +2300,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &8270337274880156453
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2445,9 +2489,13 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 1
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   openSpeed: 2
   openOffset: {x: 0, y: 0, z: -0.4}
   isOpen: 0
+  openClip: {fileID: 8300000, guid: 3b70e2971dc64f342a953aa12d4e350d, type: 3}
+  closeClip: {fileID: 8300000, guid: eb94dd75a92cbe743875459ad7725fd4, type: 3}
 --- !u!114 &9037712120072011680
 MonoBehaviour:
   m_ObjectHideFlags: 0

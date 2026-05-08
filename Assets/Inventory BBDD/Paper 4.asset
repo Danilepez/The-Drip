@@ -14,11 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ItemData
   itemName: Papel 4
   itemIcon: {fileID: 21300000, guid: ae496f5dad56ea645b72d374a0376368, type: 3}
-  itemDescription: "El c\xF3digo ya no sirve, cortaron el sistema central. Nuestra
-    \xFAnica esperanza es encontrar la llave maestra f\xEDsica, pero necesito reunir
-    provisiones antes de intentar bajar a los niveles inferiores del edificio. Sub\xED
-    de nuevo al segundo piso escapando de las sombras y escond\xED unos vendajes
-    y una linterna encima del refrigerador de la cocina. Ve all\xED, pero mu\xE9vete
-    en silencio absoluto; hay un ruido espeso detr\xE1s de las paredes y si haces
-    un movimiento en falso, sabr\xE1 que est\xE1s aqu\xED."
+  itemDescription: "Todo tiene sentido ahora. El director usaba las actividades grupales
+    como fachada para sus 'terapias' de control. Ve a la habitaci\xF3n diurna, la
+    sala donde proyectaban pel\xEDculas a los ancianos. Ah\xED es donde escondi\xF3
+    la pieza final del rompecabezas."
   itemType: 0

@@ -42,6 +42,8 @@ public class GameFlowController : MonoBehaviour
     public RecorderInteractable recorder;
     public bool waitForRecorder = true;
     public float recorderCooldownSeconds = 10f;
+    [Tooltip("Collider invisible que bloquea el paso hasta que termine el audio de la grabadora.")]
+    public Collider introBarrier;
 
     [Header("Recovery")]
     public float recoverySeconds = 0f;
@@ -82,6 +84,8 @@ public class GameFlowController : MonoBehaviour
         if (waitForRecorder && recorder != null)
         {
             SetState(GameFlowState.Intro);
+            // Activar barrera al inicio
+            if (introBarrier != null) introBarrier.enabled = true;
             return;
         }
 
@@ -232,6 +236,9 @@ public class GameFlowController : MonoBehaviour
 
         enemyDirector?.StopHunt();
         SetState(GameFlowState.SafeRoom);
+
+        // Activar minijuego directamente — sin depender de OnTriggerEnter
+        safeRoomDoor?.BeginMinigame();
     }
 
     public void ExitSafeRoom()
@@ -263,6 +270,9 @@ public class GameFlowController : MonoBehaviour
 
         // Activate doll
         DollController doll = dollController != null ? dollController : DollController.Instance;
+
+        // Teleportar muñeca a su spawn de FinalChase antes de activarla
+        doll?.WarpToSpawnPoint();
         doll?.Activate();
 
         Debug.Log("[GameFlow] FinalChase — ambos enemigos activos. ¡Corre!");
@@ -272,6 +282,16 @@ public class GameFlowController : MonoBehaviour
     {
         if (!waitForRecorder) return;
         if (CurrentState != GameFlowState.Intro) return;
+
+        // Avanzar objetivo (grabadora terminó → ir al escritorio)
+        ObjectiveDisplay.Instance?.NextObjective();
+
+        // Audio terminó → desactivar barrera inmediatamente
+        if (introBarrier != null)
+        {
+            introBarrier.enabled = false;
+            Debug.Log("[GameFlow] Audio terminado — barrera de intro desactivada.");
+        }
 
         if (_introRoutine != null)
         {

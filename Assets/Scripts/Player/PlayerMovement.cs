@@ -174,12 +174,15 @@ public class PlayerMovement : MonoBehaviour
 
     private void checkPlayerIsGrounded()
     {
+        // Si groundMask es 0 (Nothing), usar todas las capas como fallback
+        int mask = groundMask.value != 0 ? groundMask.value : ~0;
+
         if (groundCheck != null)
         {
-            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, mask);
             return;
         }
 
-        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance + 0.2f, groundMask, QueryTriggerInteraction.Ignore);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, groundDistance + 0.2f, mask, QueryTriggerInteraction.Ignore);
     }
 }

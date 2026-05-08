@@ -12,7 +12,7 @@ public class InventoryManager : MonoBehaviour
     public InputActionReference toggleAction;
 
     [Header("Win Condition")]
-    public bool winOnKeyCollect = true;
+    public bool winOnKeyCollect = false;
 
     public bool IsOpen { get; private set; }
     public bool IsBlocked { get; private set; }
