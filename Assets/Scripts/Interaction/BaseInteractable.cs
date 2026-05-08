@@ -18,6 +18,14 @@ public abstract class BaseInteractable : MonoBehaviour
     /// <summary>Bloquea la interacción sin deshabilitar el componente ni el InputAction.</summary>
     public bool isLocked = false;
 
+    [Tooltip("Si está marcado, la puerta/interactable empieza bloqueado al iniciar la escena.")]
+    public bool startLocked = false;
+
+    protected virtual void Awake()
+    {
+        isLocked = startLocked;
+    }
+
     protected virtual void OnEnable()  => interactAction?.action?.Enable();
     protected virtual void OnDisable() => interactAction?.action?.Disable();
 

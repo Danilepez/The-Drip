@@ -1075,6 +1075,34 @@ PrefabInstance:
       propertyPath: itemData
       value: 
       objectReference: {fileID: 11400000, guid: 959350ad354491c48802ee55266f8a67, type: 2}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 857577085}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: UnlockEntrance
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LockedDoor, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 5317924821669490351, guid: 0b7451c289c0d9547a21ba7eb3340776, type: 3}
+      propertyPath: onCollected.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2667,7 +2695,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SafeRoomZone
   requirePlayerTag: 1
   playerTag: Player
-  exitReturnsToExploration: 1
 --- !u!65 &571732753
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3200,8 +3227,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1627602213}
   - {fileID: 1069258662}
+  - {fileID: 1627602213}
   - {fileID: 1054229733}
   - {fileID: 443931528}
   m_Father: {fileID: 0}
@@ -4010,7 +4037,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LockedDoor
   doorController: {fileID: 966255641}
+  entranceDoor: {fileID: 0}
   itemsToCollect: []
+  debugSkipMinigame: 0
   playerTag: Player
   lockSound: {fileID: 0}
   unlockSound: {fileID: 0}
@@ -4028,7 +4057,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LockedDoor
   doorController: {fileID: 966255641}
+  entranceDoor: {fileID: 966255641}
   itemsToCollect: []
+  debugSkipMinigame: 0
   playerTag: Player
   lockSound: {fileID: 0}
   unlockSound: {fileID: 0}
@@ -5116,8 +5147,10 @@ MonoBehaviour:
     m_Bits: 4294967295
   requireExamineMode: 0
   showHint: 1
+  isLocked: 0
+  startLocked: 0
   audioSource: {fileID: 1060535646}
-  clip: {fileID: 8300000, guid: 9c1ea4f32b21af446813f9b8ea949283, type: 3}
+  clip: {fileID: 8300000, guid: 812b1c5564a8eb64c8baed6c9c5d2c07, type: 3}
   playOnce: 1
 --- !u!82 &1060535646
 AudioSource:
@@ -6680,7 +6713,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3392411146440894746, guid: 3fb41efb2914c9f419fcc7156e6b30f6, type: 3}
       propertyPath: m_Name
-      value: SKM_DemonDoll_Var1
+      value: Doll
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7414,6 +7447,8 @@ MonoBehaviour:
   maxSpawnInterval: 30
   avoidRepeatSpawn: 1
   enemyDirector: {fileID: 1069258663}
+  safeRoomDoor: {fileID: 857577085}
+  dollController: {fileID: 1023108411}
   recorder: {fileID: 1060535645}
   waitForRecorder: 1
   recorderCooldownSeconds: 10
@@ -7717,6 +7752,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8602020692024234863}
     m_Modifications:
+    - target: {fileID: 685396730879153590, guid: 6523f6e5dac1a3a4a982df4ce4f443b5, type: 3}
+      propertyPath: startLocked
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6570192530624075020, guid: 6523f6e5dac1a3a4a982df4ce4f443b5, type: 3}
       propertyPath: m_Name
       value: DoorD_V2 (2)
@@ -149343,6 +149382,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   allowPickupWhileExamining: 1
+  onCollected:
+    m_PersistentCalls:
+      m_Calls: []
   useHighlight: 1
   highlightColor: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
   useBaseColor: 1
