@@ -5,7 +5,7 @@ public class MainMenuUI : MonoBehaviour
 {
     public void OnPlayClicked()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("IntroCinematic");
     }
 
     public void OnQuitClicked()
