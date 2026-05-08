@@ -1,4 +1,5 @@
 using UnityEngine;
+
 public class WinScreenUI : MonoBehaviour
 {
     private void Start()
@@ -7,12 +8,7 @@ public class WinScreenUI : MonoBehaviour
         Cursor.visible = true;
     }
 
-    public void OnRestartClicked()
-    {
-        GameManager.Instance?.RestartGame();
-    }
-
-    public void OnQuitClicked()
+    public void OnMainMenuClicked()
     {
         GameManager.Instance?.GoToMainMenu();
     }
